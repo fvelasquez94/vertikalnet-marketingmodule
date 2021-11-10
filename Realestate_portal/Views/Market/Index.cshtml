@@ -1,0 +1,32 @@
+﻿
+@{ ViewBag.Title = "Market";
+    Layout = "~/Views/Shared/_CRM_Marketing.cshtml";
+}
+<style>
+    .image{
+        height:500px;
+        width:100%;
+    }
+</style>
+<br />
+<div class="row">
+    <div class="col-12">
+        <nav style="float: left" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+       
+                <li class="breadcrumb-item active" aria-current="page">Market</li>
+            </ol>
+        </nav>
+       @Html.Partial("Utilities/ShoppingCart")       
+    </div>
+</div>
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h3 style="font-weight: bold; color: black ">Click image below to see available brands</h3>
+            <a href="@Url.Action("Brands", "Market")">
+                <img class="img-fluid image" src="~/Content/images/marketing/module_marketing.PNG" alt="Click to see available brands" />
+            </a>          
+        </div>
+    </div>
+
+

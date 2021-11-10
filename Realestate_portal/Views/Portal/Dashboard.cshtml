@@ -1,0 +1,691 @@
+﻿@using Realestate_portal.Models;
+@{
+    ViewBag.Title = "Dashboard";
+    Sys_Users user = (Sys_Users)ViewBag.userdata;
+    Sys_Users userBroker = (Sys_Users)ViewBag.userdataBroker;
+}
+
+<style>
+    .cart-badge {
+        display:flex;
+        justify-content:center;               
+        font-weight: bold;             
+        color: white;
+        font-size: 80%;
+        position:relative;
+        bottom:1px;
+    }
+
+    .cart-notification {
+        position: relative;
+        left: 80px;
+       bottom:90px;
+      min-width:10px;
+    }
+
+    .badge-pulse {
+        height: 22px !important;
+        width: 22px !important;
+    }
+</style>
+<div class="container-fluid newsfeed">
+    <div class="row justify-content-center">
+        <div class="col-xl-11">
+            <div class="row">
+        
+                <!-- End Col -->
+                <!-- Begin Timeline -->
+        
+
+                <div class="row">
+                    <div class="col-xl-4 col-md-4 col-sm-6 col-remove">
+                        <!-- Begin Card -->
+                        <div class="widget-image has-shadow">
+                            <div class="contact-card">
+                                <!-- Begin Widget Image -->
+                                <div class="cover-image mx-auto">
+
+                                    <div class="c-icon">
+                                        <i class="la la-group"></i>
+                                    </div>
+                                </div>
+                                <!-- Begin Widget Body -->
+                                <div class="widget-body">
+                                    @if (ViewBag.rol == "SA")
+                                    {
+                                        <h4 class="name"><a href="@Url.Action("CRMDashboard","CRM", new { broker=ViewBag.selbroker})">CRM</a></h4>
+                                    }
+                                    else
+                                    {
+                                        <h4 class="name"><a href="@Url.Action("CRMDashboard","CRM")">CRM</a></h4>
+                                    }
+
+
+
+
+                                    <div class="item">
+                                        <div class="quick-about">
+                                            <div class="row d-flex align-items-center">
+                                                <div class="col-12">
+
+                                                    <p>
+                                                        Customer Relationship Manager. Manage your customer Data
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <!-- End Widget Body -->
+                            </div>
+                        </div>
+                        <!-- End Card -->
+                    </div>
+
+                    <div class="col-xl-4 col-md-4 col-sm-6 col-remove">
+                        <!-- Begin Card -->
+                        <div class="widget-image has-shadow">
+                            <div class="contact-card">
+                                <!-- Begin Widget Image -->
+                                <div class="cover-image mx-auto">
+
+                                    <div class="c-icon">
+                                        <i class="la la-share-alt"></i>
+                                    </div>
+                                </div>
+                                <!-- Begin Widget Body -->
+                                <div class="widget-body">
+
+                                    @if (ViewBag.rol == "SA")
+                                    {
+                                        <h4 class="name"><a href="@Url.Action("PGR_network","Portal", new { broker=ViewBag.selbroker})">Network</a></h4>
+                                    }
+                                    else
+                                    {
+
+                                        <h4 class="name"><a href="@Url.Action("PGR_network","Portal")">Network</a></h4>
+                                    }
+
+                                    <div class="item">
+                                        <div class="quick-about">
+                                            <div class="row d-flex align-items-center">
+                                                <div class="col-12">
+
+                                                    <p>
+                                                        Find and Connect with Professionals for a smother transaction.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <!-- End Widget Body -->
+                            </div>
+                        </div>
+                        <!-- End Card -->
+                    </div>
+                    <div class="col-xl-4 col-md-4 col-sm-6 col-remove">
+                        <!-- Begin Card -->
+                        <div class="widget-image has-shadow">
+                            <div class="contact-card">
+                                <!-- Begin Widget Image -->
+                                <div class="cover-image mx-auto">
+
+                                    <div class="c-icon">
+                                        <i class="la la-shopping-cart"></i>
+                                    </div>
+                                </div>
+                                <!-- Begin Widget Body -->
+                                <div class="widget-body">
+
+                                    @if (ViewBag.rol == "SA")
+                                    {
+                                        if (ViewBag.CartItems > 0)
+                                        {
+                                            <div class="cart-notification">
+                                                <span class="badge-pulse"><p class="cart-badge">@ViewBag.CartItems</p></span>
+                                            </div>
+                                        }
+
+                                        <h4 class="name"><a href="@Url.Action("Index","Market")">Market</a></h4>
+                                    }
+                                    else
+                                    {
+                                        if (ViewBag.CartItems > 0)
+                                        {
+                                            <div class="cart-notification">
+                                                <span class="badge-pulse"><p class="cart-badge">@ViewBag.CartItems</p></span>
+                                            </div>
+                                        }
+                                        <h4 class="name"><a href="@Url.Action("Index","Market")">Market</a></h4>
+
+                                    }
+                                    <div class="item">
+                                        <div class="quick-about">
+                                            <div class="row d-flex align-items-center">
+                                                <div class="col-12">
+
+                                                    <p>
+                                                        All approved designs ready for you to order.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <!-- End Widget Body -->
+                            </div>
+                        </div>
+                        <!-- End Card -->
+                    </div>
+                    <div class="col-xl-4 col-md-4 col-sm-6 col-remove">
+                        <!-- Begin Card -->
+                        <div class="widget-image has-shadow">
+                            <div class="contact-card">
+                                <!-- Begin Widget Image -->
+                                <div class="cover-image mx-auto">
+
+                                    <div class="c-icon">
+                                        <i class="la la-cloud-upload"></i>
+                                    </div>
+                                </div>
+                                <!-- Begin Widget Body -->
+                                <div class="widget-body">
+
+                                    @if (ViewBag.rol == "SA")
+                                    {
+                                        <h4 class="name"><a href="@Url.Action("Documents_upload","Portal", new { broker=ViewBag.selbroker})">Documents Upload</a></h4>
+                                    }
+                                    else
+                                    {
+
+                                        <h4 class="name"><a href="@Url.Action("Documents_upload","Portal")">Documents Upload</a></h4>
+                                    }
+
+                                    <div class="item">
+                                        <div class="quick-about">
+                                            <div class="row d-flex align-items-center">
+                                                <div class="col-12">
+
+                                                    <p>
+                                                        Upload all your transaction documents.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <!-- End Widget Body -->
+                            </div>
+                        </div>
+                        <!-- End Card -->
+                    </div>
+                    <div class="col-xl-4 col-md-4 col-sm-6 col-remove">
+                        <!-- Begin Card -->
+                        <div class="widget-image has-shadow">
+                            <div class="contact-card">
+                                <!-- Begin Widget Image -->
+                                <div class="cover-image mx-auto">
+
+                                    <div class="c-icon">
+                                        <i class="la la-archive"></i>
+                                    </div>
+                                </div>
+                                <!-- Begin Widget Body -->
+                                <div class="widget-body">
+
+                                    @if (ViewBag.rol == "SA")
+                                    {
+                                        <h4 class="name"><a href="@Url.Action("Resources","Portal", new { broker=ViewBag.selbroker})">Resources</a></h4>
+                                    }
+                                    else
+                                    {
+                                        <h4 class="name"><a href="@Url.Action("Resources","Portal")">Resources</a></h4>
+
+                                    }
+
+
+
+
+                                    <div class="item">
+                                        <div class="quick-about">
+                                            <div class="row d-flex align-items-center">
+                                                <div class="col-12">
+
+                                                    <p>
+                                                        Access to all MLS forms, Scripts and more.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <!-- End Widget Body -->
+                            </div>
+                        </div>
+                        <!-- End Card -->
+                    </div>
+
+                    <div class="col-xl-4 col-md-4 col-sm-6 col-remove">
+                        <!-- Begin Card -->
+                        <div class="widget-image has-shadow">
+                            <div class="contact-card">
+                                <!-- Begin Widget Image -->
+                                <div class="cover-image mx-auto">
+
+                                    <div class="c-icon">
+                                        <i class="la la-youtube-play"></i>
+                                    </div>
+                                </div>
+                                <!-- Begin Widget Body -->
+                                <div class="widget-body">
+                                    @if (ViewBag.rol == "SA")
+                                    {
+
+                                        <h4 class="name"><a href="@Url.Action("Videos","Portal",new { broker=ViewBag.selbroker})">Videos</a></h4>
+                                    }
+                                    else
+                                    {
+                                        <h4 class="name"><a href="@Url.Action("Videos","Portal")">Videos</a></h4>
+                                    }
+                                    <div class="item">
+                                        <div class="quick-about">
+                                            <div class="row d-flex align-items-center">
+                                                <div class="col-12">
+
+                                                    <p>
+                                                        Training videos.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <!-- End Widget Body -->
+                            </div>
+                        </div>
+                        <!-- End Card -->
+                    </div>
+                    <div class="col-xl-4 col-md-4 col-sm-6 col-remove">
+                        <!-- Begin Card -->
+                        <div class="widget-image has-shadow">
+                            <div class="contact-card">
+                                <!-- Begin Widget Image -->
+                                <div class="cover-image mx-auto">
+
+                                    <div class="c-icon">
+                                        <i class="la la-image"></i>
+                                    </div>
+                                </div>
+                                <!-- Begin Widget Body -->
+                                <div class="widget-body">
+                                    @if (ViewBag.rol == "SA")
+                                    {
+                                        <h4 class="name">Marketing</h4>
+                                    }
+                                    else
+                                    {
+                                        <h4 class="name">Marketing</h4>
+                                    }
+
+
+
+
+                                    <div class="item">
+                                        <div class="quick-about">
+                                            <div class="row d-flex align-items-center">
+                                                <div class="col-12">
+
+                                                    <p>
+                                                        Images for your social networks.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <!-- End Widget Body -->
+                            </div>
+                        </div>
+                        <!-- End Card -->
+                    </div>
+
+                    <div class="col-xl-4 col-md-4 col-sm-6 col-remove">
+                        <!-- Begin Card -->
+                        <div class="widget-image has-shadow">
+                            <div class="contact-card">
+                                <!-- Begin Widget Image -->
+                                <div class="cover-image mx-auto">
+
+                                    <div class="c-icon">
+                                        <i class="la la-calendar-o"></i>
+                                    </div>
+                                </div>
+                                <!-- Begin Widget Body -->
+                                <div class="widget-body">
+
+                                    @if (ViewBag.rol == "SA")
+                                    {
+                                        <h4 class="name"><a href="@Url.Action("Webinar","Portal", new { broker=ViewBag.selbroker})">Webinars</a></h4>
+                                    }
+                                    else
+                                    {
+                                        <h4 class="name"><a href="@Url.Action("Webinar","Portal")">Webinars</a></h4>
+
+                                    }
+
+
+                                    <div class="item">
+                                        <div class="quick-about">
+                                            <div class="row d-flex align-items-center">
+                                                <div class="col-12">
+
+                                                    <p>
+                                                        Stay up to date with all 7 events and access to live trainings.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <!-- End Widget Body -->
+                            </div>
+                        </div>
+                        <!-- End Card -->
+                    </div>
+                    @if (ViewBag.rol == "SA" || ViewBag.rol == "Admin")
+                    {
+                        <div class="col-xl-4 col-md-4 col-sm-6 col-remove">
+                            <!-- Begin Card -->
+                            <div class="widget-image has-shadow">
+                                <div class="contact-card">
+                                    <!-- Begin Widget Image -->
+                                    <div class="cover-image mx-auto">
+
+                                        <div class="c-icon">
+                                            <i class="la la-calendar-o"></i>
+                                        </div>
+                                    </div>
+                                    <!-- Begin Widget Body -->
+                                    <div class="widget-body">
+
+                                        @if (ViewBag.rol == "SA")
+                                        {
+                                            <h4 class="name"><a href="@Url.Action("Reservations","Portal", new { broker=ViewBag.selbroker})">Bookings</a></h4>
+                                        }
+                                        else
+                                        {
+                                            <h4 class="name"><a href="@Url.Action("Reservations","Portal")">Bookings</a></h4>
+
+                                        }
+
+
+                                        <div class="item">
+                                            <div class="quick-about">
+                                                <div class="row d-flex align-items-center">
+                                                    <div class="col-12">
+
+                                                        <p>
+                                                            Bookings.
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                    <!-- End Widget Body -->
+                                </div>
+                            </div>
+                            <!-- End Card -->
+                        </div>}
+                </div>
+                </div>
+                <!-- End Timeline -->
+                <!-- Begin Column -->
+                <!-- End Column -->
+            </div>
+            <!-- End Row -->
+        </div>
+        <!-- End Col -->
+    </div>
+    <!-- End Row -->
+</div>
+<!-- End Container -->
+
+<script type="text/javascript">
+
+
+    //const settings2 = {
+    //    "async": true,
+    //    "crossDomain": true,
+    //    "url": "https://type.fit/api/quotes",
+    //    "method": "GET"
+    //}
+    window.onload = function () {
+        //$.ajax(settings2).done(function (response) {
+        //    const data = JSON.parse(response);
+        //    var items = data;
+        //    const replacer = (key, value) => value === null ? '' : value; // specify how you want to handle null values here
+        //    const header = Object.keys(items[0]);
+        //    let csv = items.map(row => header.map(fieldName => JSON.stringify(row[fieldName], replacer)).join(','));
+        //    csv.unshift(header.join(','));
+        //    csv = csv.join('\r\n');
+
+        //    //Download the file as CSV
+        //    var downloadLink = document.createElement("a");
+        //    var blob = new Blob(["\ufeff", csv]);
+        //    var url = URL.createObjectURL(blob);
+        //    downloadLink.href = url;
+        //    downloadLink.download = "DataDump.csv";  //Name the file here
+        //    document.body.appendChild(downloadLink);
+        //    downloadLink.click();
+        //    document.body.removeChild(downloadLink);
+        //});
+
+
+
+        $('#OpenImgUpload').click(function () { $('#imgupload').trigger('click'); });
+
+
+        $('input[type="file"]').change(function () {
+               var fileData = new FormData();
+            var iduser = @user.ID_User;
+            var file = document.getElementById("imgupload").files[0];
+
+
+        // Adding one more key to FormData object
+            fileData.append('id', iduser);
+            fileData.append("imgupload", file);
+
+        //if true rotate to the right
+        //$('#maindivprogress_' + ID).show();
+        $.ajax({
+            url: '/Users/changeProfilePicture',
+            //xhr: function () {
+            //    var xhr = new window.XMLHttpRequest();
+            //    xhr.upload.addEventListener("progress", function (evt) {
+            //        if (evt.lengthComputable) {
+            //            var percentComplete = (evt.loaded / evt.total) * 100;
+
+            //            $('#divprogress_' + ID).width(percentComplete + '%');
+            //            $('#imgprogress_' + ID).html(percentComplete.toFixed(2) + "%");
+
+            //        }
+            //    }, false);
+            //    return xhr;
+            //},
+            type: "POST",
+            contentType: false, // Not to set any content header
+            processData: false, // Not to process data
+            //async: true,
+            timeout: 80000,
+            data: fileData,
+            success: function (result) {
+                //$("#modal_demoform_saving").modal('hide');
+                if (result == "SUCCESS") {
+                    window.location.reload(true);
+                } else {
+                    console.log(result);
+                }
+                //$("#loading").hide();
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert("Error uploading image. " + errorThrown );
+            }
+        });
+        });
+
+    };
+
+
+
+
+
+
+    var like = @ViewBag.likepost;
+    var showcomm = 0;
+    function showcomments() {
+        if (showcomm == 0) {
+            $("#commentshide").show();
+            showcomm = 1;
+        } else {
+            $("#commentshide").hide();
+            showcomm = 0;
+        }
+
+    }
+
+    function likepost() {
+        if (like == 0) {
+
+
+            var id_parentPost = @ViewBag.idparentpost;
+
+        $.ajax({
+            type: "POST",
+            url: '/Portal/Likepost',
+            data: JSON.stringify({
+                id: id_parentPost
+            }),
+            datatype: 'application/json',
+            contentType: 'application/json',
+            processData: false,
+            success: function (response) {
+                if (response == "SUCCESS") {
+
+                    like = 1;
+                    $("#likeposticon").removeClass('la-heart-o');
+                    $("#likeposticon").addClass('la-heart');
+                    $("#textlike").show();
+
+                    var numl = parseInt($("#numlikes").html());
+                    var numl = numl + 1;
+                    $("#numlikes").html(numl);
+
+                } else {
+
+                    alert(response);
+                }
+            },
+            error: function (error) {
+
+                alert("Error posting comment");
+            }
+        });
+
+
+        } else {
+
+                        var id_parentPost = @ViewBag.idparentpost;
+
+        $.ajax({
+            type: "POST",
+            url: '/Portal/Dislikepost',
+            data: JSON.stringify({
+                id: id_parentPost
+            }),
+            datatype: 'application/json',
+            contentType: 'application/json',
+            processData: false,
+            success: function (response) {
+                if (response == "SUCCESS") {
+
+                    like = 0;
+                    $("#likeposticon").addClass('la-heart-o');
+                    $("#likeposticon").removeClass('la-heart');
+                    $("#textlike").hide();
+
+                    var numl = parseInt($("#numlikes").html());
+                    var numl = numl -1;
+                    $("#numlikes").html(numl);
+
+                } else {
+
+                    alert(response);
+                }
+            },
+            error: function (error) {
+
+                alert("Error posting comment");
+            }
+        });
+
+
+        }
+
+    }
+
+    function saveComment() {
+
+        var comment = $.trim($("#commentposttext").val());
+        var id_parentPost = @ViewBag.idparentpost;
+        $("#btnpostcomment").attr("disabled", true);
+        $.ajax({
+            type: "POST",
+            url: '/Portal/Postcomment',
+            data: JSON.stringify({
+                comment: comment,
+                id: id_parentPost
+            }),
+            datatype: 'application/json',
+            contentType: 'application/json',
+            processData: false,
+            success: function (response) {
+                if (response == "SUCCESS") {
+
+                    $("#btnpostcomment").attr("disabled", false);
+                    var numl = parseInt($("#numcomments").html());
+                    var numl = numl + 1;
+                    $("#numcomments").html(numl);
+                    window.location.reload(true);
+                } else {
+                    $("#btnpostcomment").attr("disabled", false);
+                    alert(response);
+                }
+            },
+            error: function (error) {
+                $("#btnpostcomment").attr("disabled", false);
+                alert("Error posting comment");
+            }
+        });
+    }
+
+</script>

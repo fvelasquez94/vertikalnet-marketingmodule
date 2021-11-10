@@ -1,0 +1,211 @@
+﻿
+@{
+    ViewBag.Title = "Categories";
+    Layout = "~/Views/Shared/_CRM_Marketing.cshtml";
+}
+
+<style>
+    .brand-1 {
+        width: 400px;
+        height: 150px;
+        background-color: black;
+        color: white;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        font-size: 25px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: antiquewhite;
+        padding: 0;
+    }
+
+
+    .brand-2 {
+        width: 150px;
+        height: 200px;
+        background-color: white;
+        color: black;
+        font-weight: bold;
+        text-align: center;
+        border-width: 3px;
+        border-style: solid;
+        border-color: darkgray;
+        padding: 0;
+        box-shadow: rgba(0,0,0,0.2) 5px 5px 7px;
+    }
+
+    .item-brands {
+        position: relative;
+    }
+
+    .message {
+        position: absolute;
+        bottom: 2px;
+        left: 8px;
+        width: 90%;
+        height: 20%;
+        background-color: rgba(112,137,232,1);
+        opacity: 0;
+        transition: opacity 0.25s;
+    }
+
+    .item-brands:hover .message {
+        opacity: 1;
+    }
+
+    .brand-2:hover {
+        border-color: rgba(112,137,232,1);
+    }
+
+    .m-label {
+        position: relative;
+        margin-top: 10px;
+        color: white;
+    }
+
+
+
+</style>
+<br />
+<div class="row">
+    <div class="col-12 ">
+        <nav aria-label="breadcrumb" class="float-left">
+            <ol class="breadcrumb">
+          
+                <li class="breadcrumb-item"><a href="@Url.Action("Index","Market")">Market</a></li>
+                <li class="breadcrumb-item"><a href="@Url.Action("brands","Market")">Brands</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Categories</li>
+            </ol>
+        </nav>
+        @Html.Partial("Utilities/ShoppingCart")
+    </div>
+</div>
+
+<div class="container mt-3">
+    <div class="row m-5">
+        <div class="col-md-12  text-center">
+            <h1 style="font-weight: bold; color: black ">Categories </h1>
+            <br />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2 col-sm-12  text-center">
+            <div class="item-brands">
+                <a href="@Url.Action("Template","Market")">
+                    <div class="brand-2">
+                        <br />
+                        <div>
+                            <p>Business Cards</p>
+                        </div>
+                        <br />
+                        <div>
+                            <img src="~/Content/images/marketing/R-business-cards-lp.png" height="100" alt="Alternate Text" />
+                        </div>
+                        <div class="message">
+                            <p class="m-label">Click to see details</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+
+        </div>
+        <div class="col-md-2 col-sm-12  text-center">
+            <div class="item-brands">
+                <a href="@Url.Action("Template","Market")">
+                    <div class="brand-2">
+                        <br />
+                        <div>
+                            <p>Directionals</p>
+                        </div>
+                        <br />
+                        <div>
+                            <img src="~/Content/images/marketing/R-directionals-lp.png" height="100" alt="Alternate Text" />
+                        </div>
+                        <div class="message">
+                            <p class="m-label">Click to see details</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-2 col-sm-12  text-center">
+            <div class="item-brands">
+                <a href="@Url.Action("Template","Market")">
+                    <div class="brand-2">
+                        <br />
+                        <div>
+                            <p>Closing</p>
+                        </div>
+                        <br />
+                        <div>
+                            <img src="~/Content/images/marketing/R-closing-sign-home.png" height="100" alt="Alternate Text" />
+                        </div>
+                        <div class="message">
+                            <p class="m-label">Click to see details</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-2 col-sm-12  text-center">
+            <div class="item-brands">
+                <a href="@Url.Action("Template","Market")">
+                    <div class="brand-2">
+                        <br />
+                        <div>
+                            <p>Panels</p>
+                        </div>
+                        <br />
+                        <div>
+                            <img src="~/Content/images/marketing/R-panel-lp.png" height="100" alt="Alternate Text" />
+                        </div>
+                        <div class="message">
+                            <p class="m-label">Click to see details</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-2 col-sm-12  text-center">
+            <div class="item-brands">
+                <a href="@Url.Action("Template","Market")">
+                    <div class="brand-2">
+                        <br />
+                        <div>
+                            <p>Reflectives</p>
+                        </div>
+                        <br />
+                        <div>
+                            <img src="~/Content/images/marketing/R-panel-reflective-lp.png" height="100" alt="Alternate Text" />
+                        </div>
+                        <div class="message">
+                            <p class="m-label">Click to see details</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-2 col-sm-12  text-center">
+            <div class="item-brands">
+                <a href="@Url.Action("Template","Market")">
+                    <div class="brand-2">
+                        <br />
+                        <div>
+                            <p>Rides</p>
+                        </div>
+                        <br />
+                        <div>
+                            <img src="~/Content/images/marketing/R-riders-lp.png" height="100" alt="Alternate Text" />
+                        </div>
+                        <div class="message">
+                            <p class="m-label">Click to see details</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+</div>

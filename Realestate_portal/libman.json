@@ -1,0 +1,14 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "fontawesome-iconpicker@3.2.0",
+      "destination": "lib/fontawesome-iconpicker/"
+    },
+    {
+      "library": "air-datepicker@2.2.3",
+      "destination": "Content/common/library/air-datepicker-master/"
+    }
+  ]
+}

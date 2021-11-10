@@ -1,0 +1,66 @@
+﻿
+@{
+    Layout = null;
+    List<Realestate_portal.Models.Sys_Notifications> notifications = ViewBag.notifications;
+    Realestate_portal.Models.Sys_Users activeuser = Session["activeUser"] as Realestate_portal.Models.Sys_Users;
+}
+
+<!-- Begin Header -->
+<header class="header"  style="box-shadow: rgba(0,0,0,0.1) 3px 3px; z-index: 1000 !important;">
+    <nav class="navbar fixed-top" >
+        <!-- Begin Search Box-->
+        <!-- End Search Box-->
+        <!-- Begin Topbar -->
+        <div class="navbar-holder d-flex align-items-center align-middle justify-content-between">
+            <!-- Begin Logo -->
+            <div class="navbar-header">     
+                    <a href="@Url.Action("Index","Market")" class="navbar-brand">
+                        <div class="brand-image brand-big">
+                            <img src="~/Content/pgrlogos/S7VENLogoBlack.png" alt="logo" style="width:100px;" class="logo-big">
+                        </div>
+                        <div class="brand-image brand-small">
+                            <img src="~/Content/pgrlogos/S7VENLogoBlack.png" alt="logo" style="width:100px;" class="logo-big">
+                        </div>
+                    </a>
+                <!-- Toggle Button -->
+                @*<a id="toggle-btn" href="#" class="menu-btn active">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </a>*@
+                <!-- End Toggle -->
+            </div>
+            <!-- End Logo -->
+            <!-- Begin Navbar Menu -->
+            <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center pull-right">
+                <!-- Search -->
+                <!-- End Search -->
+                <!-- Begin Notifications -->
+ 
+                <!-- End Notifications -->
+                <!-- User -->
+                <li class="nav-item dropdown">
+                    <a id="user" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link">
+                        @*@if (activeuser.Image == "")
+        {
+            <img src="~/Content/pgrlogos/S7VENStandalone.png" alt="..." class="avatar rounded-circle">
+        }
+        else
+        {
+            <img src="@Url.Content(activeuser.Image)" alt="..." class="avatar rounded-circle">
+        }*@
+                        <img src="~/Content/pgrlogos/S7VENStandalone.png" alt="..." class="avatar rounded-circle">
+                    </a>
+            
+                </li>
+                <!-- End User -->
+                <!-- Begin Quick Actions -->
+              
+                <!-- End Quick Actions -->
+            </ul>
+            <!-- End Navbar Menu -->
+        </div>
+        <!-- End Topbar -->
+    </nav>
+</header>
+<!-- End Header -->
