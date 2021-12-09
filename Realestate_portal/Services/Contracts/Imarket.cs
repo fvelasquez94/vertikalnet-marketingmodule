@@ -10,9 +10,11 @@ namespace Realestate_portal.Services.Contracts
 {
    public interface Imarket
     {
-        List<Template_categories> getCategories();
+        List<Template_type> getCategories(int category, int subcategory = 0);
 
-        List<Template_Layout> getTemplatesLayout(int type, int company);
+        List<template_subcategories> getSubcategories(int id);
+
+        List<Template_Layout> getTemplatesLayout(int type, int company, int subcategory=0);
 
         Template_Details GetTemplateDetailsById(string id);
 
@@ -102,5 +104,9 @@ namespace Realestate_portal.Services.Contracts
         List<signs_description> GetDescriptionBydimensionId(int?[] dimension);
 
         Colors  GetTemplateColorsById(string id);
+
+
+        List<Template_categories> GetBrandstCategories();
+
     }
 }

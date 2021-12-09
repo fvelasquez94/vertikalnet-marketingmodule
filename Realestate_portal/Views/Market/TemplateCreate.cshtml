@@ -27,7 +27,7 @@
             font-weight: @Model.Company.font_weight;
             overflow: visible;
             padding: 0;
-      /** border: solid red 2px; */ 
+     /**border: solid red 2px;*/
             text-align:@Model.Company.text_position;
         }
     </style>
@@ -56,7 +56,7 @@
             font-weight: @Model.Header.font_weight;
             overflow: visible;
             padding: 0;
- /** border: solid red 2px; */ 
+/**border: solid red 2px;*/
               text-align:@Model.Header.text_position;
         }
     </style>
@@ -85,7 +85,7 @@
             font-weight: @Model.Agent.font_weight;
             overflow: visible;
             padding: 0;
-     /** border: solid red 2px; */ 
+    /**border: solid red 2px;*/
             text-align:@Model.Agent.text_position;
         }
     </style>
@@ -114,7 +114,7 @@
             font-weight: @Model.Phone.font_weight;
             overflow: visible;
             padding: 0;
- /** border: solid red 2px; */ 
+/**border: solid red 2px;*/
               text-align:@Model.Phone.text_position;
         }
     </style>
@@ -197,7 +197,7 @@
             font-weight: @Model.Website.font_weight;
             overflow: visible;
             padding: 0;
- /** border: solid red 2px; */ 
+/**border: solid red 2px;*/
               text-align:@Model.Website.text_position;
         }
     </style>
@@ -227,7 +227,7 @@
             align-items: center;
             overflow: visible;
             padding: 0;
- /** border: solid red 2px; */ 
+/**border: solid red 2px;*/
               text-align:@Model.Title.text_position;
         }
     </style>
@@ -257,7 +257,7 @@
             justify-content: @Model.Email.text_position;
             overflow: visible;
             padding: 0;
- /** border: solid red 2px; */ 
+/**border: solid red 2px;*/
               text-align:@Model.Email.text_position;
         }
     </style>
@@ -288,7 +288,7 @@
             justify-content: @Model.Message.text_position;
             overflow: visible;
             padding: 0;
- /** border: solid red 2px; */ 
+/**border: solid red 2px;*/
               text-align:@Model.Message.text_position;
         }
     </style>
@@ -318,7 +318,7 @@
             justify-content: @Model.Other.text_position;
             overflow: visible;
             padding: 0;
- /** border: solid red 2px; */ 
+/**border: solid red 2px;*/
               text-align:@Model.Other.text_position;
         }
     </style>
@@ -348,7 +348,7 @@
             justify-content: @Model.Adress_1.text_position;
             overflow: visible;
             padding: 0;
- /** border: solid red 2px; */ 
+/**border: solid red 2px;*/
               text-align:@Model.Adress_1.text_position;
         }
     </style>
@@ -379,7 +379,7 @@
             justify-content: @Model.Adress_2.text_position;
             overflow: visible;
             padding: 0;
- /** border: solid red 2px; */ 
+/**border: solid red 2px;*/
               text-align:@Model.Adress_2.text_position;
         }
     </style>
@@ -407,7 +407,7 @@
             font-weight: @Model.Facebook.font_weight;
             overflow: visible;
             padding: 0;
- /** border: solid red 2px; */ 
+/**border: solid red 2px;*/
               text-align:@Model.Facebook.text_position;
         }
     </style>
@@ -435,7 +435,7 @@
             font-weight: @Model.Instagram.font_weight;
             overflow: visible;
             padding: 0;
- /** border: solid red 2px; */ 
+/**border: solid red 2px;*/
               text-align:@Model.Instagram.text_position;
         }
     </style>
@@ -465,9 +465,9 @@
         border-style: solid;
     }
 
-    ul{
-        display:flex;
-        flex-direction:row;
+    ul > #colorbtns {
+        display: flex;
+        flex-direction: row;
     }
 
     .bubble{
@@ -485,7 +485,7 @@
     <div class="col-12">
         <nav aria-label="breadcrumb" class="float-left">
             <ol class="breadcrumb">
-        
+                <li class="breadcrumb-item"><a href="@Url.Action("Dashboard", "Portal", new {broker=0 })">Home</a></li>
                 <li class="breadcrumb-item"><a href="@Url.Action("Index","Market")">Market</a></li>
                 <li class="breadcrumb-item"><a href="@Url.Action("brands","Market")">Brands</a></li>
                 <li class="breadcrumb-item"><a href="@Url.Action("Categories","Market")">Categories</a></li>
@@ -554,31 +554,31 @@
             <li><button class="bubble"></button></li>
         </ul>
         <div id="outtercanvas" style="width:@Model.Details.width; height:@Model.Details.height">
-            <img class="shadow-lg img-bordered" src="~/@Model.Details.cleaned_path" id="img" alt="Template to edit" />
+            <img class="shadow-lg img-bordered" src="~/@Model.Details.cleaned_path" id="img" title="@Model.Details.id" alt="Template to edit" />
             @if (Model.Header != null)
             {
-                <h4 id="header">@Model.Header.description </h4>
+                <h4 id="header" title="Header">@Model.Header.description </h4>
 
                 <div id="headerid" style="display:none">@Model.Header.id</div>
             }
             @if (Model.Company != null)
             {
-                <h4 id="company">@Model.Company.description </h4>
+                <h4 id="company" title="Company">@Model.Company.description </h4>
                 <div id="companyid" style="display:none">@Model.Company.id</div>
             }
             @if (Model.Agent != null)
             {
-                <h4 id="agent">@Model.Agent.description </h4>
+                <h4 id="agent" title="Agent">@Model.Agent.description </h4>
                 <div id="agentid" style="display:none">@Model.Agent.id</div>
             }
             @if (Model.Phone != null)
             {
-                <h4 id="phone">@Model.Phone.description </h4>
+                <h4 id="phone" title="Phone">@Model.Phone.description </h4>
                 <div id="phoneid" style="display:none">@Model.Phone.id</div>
             }
             @if (Model.Website != null)
             {
-                <h4 id="website"> @Model.Website.description </h4>
+                <h4 id="website" title="Website"> @Model.Website.description </h4>
                 <div id="websiteid" style="display:none">@Model.Website.id</div>
             }
             @if (Model.Photo != null)
@@ -593,42 +593,42 @@
             }
             @if (Model.Title != null)
             {
-                <h4 id="title">@Model.Title.description </h4>
+                <h4 id="title" title="Title">@Model.Title.description </h4>
                 <div id="titleid" style="display:none">@Model.Title.id</div>
             }
             @if (Model.Email != null)
             {
-                <h4 id="email">@Model.Email.description </h4>
+                <h4 id="email" title="Email">@Model.Email.description </h4>
                 <div id="emailid" style="display:none">@Model.Email.id</div>
             }
             @if (Model.Message != null)
             {
-                <h4 id="message">@Model.Message.description </h4>
+                <h4 id="message" title="Message">@Model.Message.description </h4>
                 <div id="messageid" style="display:none">@Model.Message.id</div>
             }
             @if (Model.Other != null)
             {
-                <h4 id="other">@Model.Other.description </h4>
+                <h4 id="other" title="Other">@Model.Other.description </h4>
                 <div id="otherid" style="display:none">@Model.Other.id</div>
             }
             @if (Model.Adress_1 != null)
             {
-                <h4 id="adress1">@Model.Adress_1.description </h4>
+                <h4 id="adress1" title="Adress_1">@Model.Adress_1.description </h4>
                 <div id="adress1id" style="display:none">@Model.Adress_1.id</div>
             }
             @if (Model.Adress_2 != null)
             {
-                <h4 id="adress2">@Model.Adress_2.description </h4>
+                <h4 id="adress2" title="Adress_2">@Model.Adress_2.description </h4>
                 <div id="adress2id" style="display:none">@Model.Adress_2.id</div>
             }
             @if (Model.Facebook != null)
             {
-                <h4 id="facebook">@Model.Facebook.description </h4>
+                <h4 id="facebook" title="Facebook">@Model.Facebook.description </h4>
                 <div id="facebookid" style="display:none">@Model.Facebook.id</div>
             }
             @if (Model.Instagram != null)
             {
-                <h4 id="instagram">@Model.Instagram.description </h4>
+                <h4 id="instagram" title="Instagram">@Model.Instagram.description </h4>
                 <div id="instagramid" style="display:none">@Model.Instagram.id</div>
             }
 

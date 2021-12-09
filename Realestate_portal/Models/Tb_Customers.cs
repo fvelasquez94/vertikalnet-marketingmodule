@@ -18,6 +18,15 @@ using System;
 public partial class Tb_Customers
 {
 
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+    public Tb_Customers()
+    {
+
+        this.Tb_Process = new HashSet<Tb_Process>();
+
+    }
+
+
     public int ID_Customer { get; set; }
 
     public string Name { get; set; }
@@ -59,6 +68,10 @@ public partial class Tb_Customers
 
 
     public virtual Sys_Company Sys_Company { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<Tb_Process> Tb_Process { get; set; }
 
 }
 

@@ -28,6 +28,8 @@ public partial class Template_categories
 
         this.T_Company_Type = new HashSet<T_Company_Type>();
 
+        this.template_subcategories = new HashSet<template_subcategories>();
+
     }
 
 
@@ -36,6 +38,8 @@ public partial class Template_categories
     public string category { get; set; }
 
     public string path { get; set; }
+
+    public Nullable<bool> childs { get; set; }
 
 
 
@@ -50,6 +54,10 @@ public partial class Template_categories
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<T_Company_Type> T_Company_Type { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<template_subcategories> template_subcategories { get; set; }
 
 }
 

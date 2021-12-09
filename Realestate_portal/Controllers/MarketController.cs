@@ -65,7 +65,7 @@ namespace Realestate_portal.Controllers
                 ViewBag.totalgains = gains.gains;
                 ViewBag.rol = user.GetUserRole();
                 ViewBag.CartItems = repo.GetCartCount();
-                return View();
+                return View(repo.GetBrandstCategories());
             }
             else
             {
@@ -74,10 +74,15 @@ namespace Realestate_portal.Controllers
         }
 
         [HttpGet]
-        public ActionResult Categories(int broker = 0)
+        public ActionResult Categories(int id, bool? child, int subcategory=0)
         {
             if (general.checkSession())
             {
+
+                if (child != null)
+                {
+                    return RedirectToAction("Companies", "Market", new { id = id, subcategory = true });
+                }
                 //here starts viewbag items assignation 
                 var gains = user.SetProjectedGains();
 
@@ -87,8 +92,23 @@ namespace Realestate_portal.Controllers
                 ViewBag.totalgains = gains.gains;
                 ViewBag.rol = user.GetUserRole();
                 ViewBag.CartItems = repo.GetCartCount();
+                ViewBag.company = id;
+               
+                List<Template_type> types = null;
 
-                return View();
+                if (subcategory != 0)
+                {
+                    ViewBag.pgr = true;
+                    ViewBag.sub = subcategory;
+                    types = repo.getCategories(id, subcategory);
+                }
+                else
+                {
+                    ViewBag.pgr = false;
+                    types = repo.getCategories(id);
+                }
+              
+                return View(types);                
             }
             else
             {
@@ -96,10 +116,10 @@ namespace Realestate_portal.Controllers
             }
         }
 
-        public ActionResult Companies()
+        public ActionResult Companies(int id, bool? subcategory)
         {
             if (general.checkSession())
-            {
+            {              
                 //here starts viewbag items assignation 
                 var gains = user.SetProjectedGains();
 
@@ -109,7 +129,18 @@ namespace Realestate_portal.Controllers
                 ViewBag.totalgains = gains.gains;
                 ViewBag.rol = user.GetUserRole();
                 ViewBag.CartItems = repo.GetCartCount();
-                return View(repo.getCategories());
+                ViewBag.company = id;
+                List<template_subcategories> sub = new List<template_subcategories>();
+
+                if ((bool)subcategory)
+                {
+                     sub = repo.getSubcategories(id);
+                }
+
+              
+   
+
+                return View(sub);
             }
             else
             {
@@ -119,7 +150,7 @@ namespace Realestate_portal.Controllers
 
 
         [HttpGet]
-        public ActionResult Template(int type=0, int company=0)
+        public ActionResult Template(int subcategory=0, int type=0, int company=0)
         {
             if (general.checkSession())
             {
@@ -133,6 +164,13 @@ namespace Realestate_portal.Controllers
                 ViewBag.rol = user.GetUserRole();
                 ViewBag.CartItems = repo.GetCartCount();
                 ViewBag.company = company;
+                ViewBag.pgr = false;
+
+                if (subcategory != 0)
+                {
+                    ViewBag.pgr = true;
+                    return View(repo.getTemplatesLayout(company, type, subcategory));
+                }
 
                 return View(repo.getTemplatesLayout(company, type));
             }

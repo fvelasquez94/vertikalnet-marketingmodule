@@ -84,7 +84,7 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="template" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="name" Type="nchar" MaxLength="25" Nullable="false" />
-          <Property Name="description" Type="nchar" MaxLength="50" />
+          <Property Name="description" Type="varchar" MaxLength="250" />
           <Property Name="p_top" Type="nchar" MaxLength="10" />
           <Property Name="p_bottom" Type="nchar" MaxLength="10" />
           <Property Name="p_right" Type="nchar" MaxLength="10" />
@@ -100,6 +100,22 @@
           <Property Name="font_weight" Type="nchar" MaxLength="20" />
           <Property Name="text_position" Type="nchar" MaxLength="20" />
           <Property Name="shape" Type="varchar" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="Market_Categ_type">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="category" Type="int" Nullable="false" />
+          <Property Name="subcategory" Type="int" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="description" Type="varchar(max)" />
+          <Property Name="business_card" Type="int" />
+          <Property Name="yard_signs" Type="int" />
+          <Property Name="riders" Type="int" />
+          <Property Name="open_house" Type="int" />
+          <Property Name="closing_signs" Type="int" />
+          <Property Name="for_sale_panels" Type="int" />
         </EntityType>
         <EntityType Name="Marketing_order_details">
           <Key>
@@ -336,6 +352,35 @@
           <Property Name="Comments" Type="int" Nullable="false" />
           <Property Name="T_image" Type="varchar(max)" Nullable="false" />
         </EntityType>
+        <EntityType Name="Tb_Process">
+          <Key>
+            <PropertyRef Name="ID_Process" />
+          </Key>
+          <Property Name="ID_Process" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="varchar(max)" Nullable="false" />
+          <Property Name="ID_User" Type="int" Nullable="false" />
+          <Property Name="ID_Customer" Type="int" Nullable="false" />
+          <Property Name="ID_Property" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Property" Type="varchar(max)" Nullable="false" />
+          <Property Name="Address" Type="varchar(max)" Nullable="false" />
+          <Property Name="Purchase_price" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Commission_amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Commissionperc" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Closing_date" Type="datetime" Nullable="false" />
+          <Property Name="Under_contract_date" Type="datetime" Nullable="false" />
+          <Property Name="Offer_accepted_date" Type="datetime" Nullable="false" />
+          <Property Name="Inspection_date" Type="datetime" Nullable="false" />
+          <Property Name="Stage" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Source" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="TypeofAgency" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Loan_Officer_name" Type="varchar(max)" Nullable="false" />
+          <Property Name="Attorneys_name" Type="varchar(max)" Nullable="false" />
+          <Property Name="Notes" Type="varchar(max)" Nullable="false" />
+          <Property Name="Creation_date" Type="datetime" Nullable="false" />
+          <Property Name="Last_update" Type="datetime" Nullable="false" />
+          <Property Name="Loan_Officer_tel" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Attorneys_tel" Type="varchar" MaxLength="150" Nullable="false" />
+        </EntityType>
         <EntityType Name="Tb_Reminders">
           <Key>
             <PropertyRef Name="ID_Reminder" />
@@ -350,6 +395,7 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="category" Type="nchar" MaxLength="25" Nullable="false" />
           <Property Name="path" Type="varchar" MaxLength="100" />
+          <Property Name="childs" Type="bit" />
         </EntityType>
         <EntityType Name="Template_colors">
           <Key>
@@ -366,6 +412,8 @@
           </Key>
           <Property Name="id" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="category" Type="int" Nullable="false" />
+          <Property Name="subcategories" Type="int" />
+          <Property Name="type" Type="int" />
           <Property Name="path" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="width" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="height" Type="varchar" MaxLength="20" Nullable="false" />
@@ -393,9 +441,9 @@
           <Property Name="saved_width" Type="varchar" MaxLength="20" />
           <Property Name="saved_height" Type="varchar" MaxLength="20" />
           <Property Name="logo_path" Type="varchar" MaxLength="100" />
-          <Property Name="type" Type="int" />
           <Property Name="price" Type="decimal" Precision="18" Scale="2" />
           <Property Name="pic_round" Type="bit" />
+          <Property Name="back" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="Template_dimensions">
           <Key>
@@ -414,12 +462,22 @@
           <Property Name="dimensions" Type="int" Nullable="false" />
           <Property Name="quantity" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="template_subcategories">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="category_type" Type="int" Nullable="false" />
+          <Property Name="location" Type="varchar(max)" Nullable="false" />
+        </EntityType>
         <EntityType Name="Template_type">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="type" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="path" Type="varchar(max)" />
         </EntityType>
         <Association Name="FK_Billing_Shipping_details_marketing_orders">
           <End Role="marketing_orders" Type="Self.marketing_orders" Multiplicity="0..1" />
@@ -504,6 +562,18 @@
             </Principal>
             <Dependent Role="labels">
               <PropertyRef Name="template" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_market_subCateg_type_Market_Categ_type">
+          <End Role="Template_categories" Type="Self.Template_categories" Multiplicity="1" />
+          <End Role="template_subcategories" Type="Self.template_subcategories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Template_categories">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="template_subcategories">
+              <PropertyRef Name="category_type" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -769,6 +839,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Tb_Process_Tb_Customers">
+          <End Role="Tb_Customers" Type="Self.Tb_Customers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Tb_Process" Type="Self.Tb_Process" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tb_Customers">
+              <PropertyRef Name="ID_Customer" />
+            </Principal>
+            <Dependent Role="Tb_Process">
+              <PropertyRef Name="ID_Customer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Tb_Reminders_Sys_Users">
           <End Role="Sys_Users" Type="Self.Sys_Users" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -807,15 +891,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Template_Details_Template_Details">
+          <End Role="Template_Details" Type="Self.Template_Details" Multiplicity="1" />
+          <End Role="Template_Details1" Type="Self.Template_Details" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Template_Details">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Template_Details1">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Template_Details_Template_type">
-          <End Role="Template_type" Type="Self.Template_type" Multiplicity="0..1" />
+          <End Role="template_subcategories" Type="Self.template_subcategories" Multiplicity="0..1" />
           <End Role="Template_Details" Type="Self.Template_Details" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Template_type">
+            <Principal Role="template_subcategories">
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="Template_Details">
-              <PropertyRef Name="type" />
+              <PropertyRef Name="subcategories" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -873,6 +969,7 @@
           <EntitySet Name="crTb_Orders" EntityType="Self.crTb_Orders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="label_color" EntityType="Self.label_color" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="labels" EntityType="Self.labels" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Market_Categ_type" EntityType="Self.Market_Categ_type" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Marketing_order_details" EntityType="Self.Marketing_order_details" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="marketing_orders" EntityType="Self.marketing_orders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Payment_Intent" EntityType="Self.Payment_Intent" Schema="dbo" store:Type="Tables" />
@@ -888,12 +985,14 @@
           <EntitySet Name="T_Company_Type" EntityType="Self.T_Company_Type" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tb_Customers" EntityType="Self.Tb_Customers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tb_Marketing" EntityType="Self.Tb_Marketing" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tb_Process" EntityType="Self.Tb_Process" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tb_Reminders" EntityType="Self.Tb_Reminders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Template_categories" EntityType="Self.Template_categories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Template_colors" EntityType="Self.Template_colors" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Template_Details" EntityType="Self.Template_Details" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Template_dimensions" EntityType="Self.Template_dimensions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="template_pricing" EntityType="Self.template_pricing" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="template_subcategories" EntityType="Self.template_subcategories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Template_type" EntityType="Self.Template_type" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Billing_Shipping_details_marketing_orders" Association="Self.FK_Billing_Shipping_details_marketing_orders">
             <End Role="marketing_orders" EntitySet="marketing_orders" />
@@ -922,6 +1021,10 @@
           <AssociationSet Name="FK_labels_Templates" Association="Self.FK_labels_Templates">
             <End Role="Template_Details" EntitySet="Template_Details" />
             <End Role="labels" EntitySet="labels" />
+          </AssociationSet>
+          <AssociationSet Name="FK_market_subCateg_type_Market_Categ_type" Association="Self.FK_market_subCateg_type_Market_Categ_type">
+            <End Role="Template_categories" EntitySet="Template_categories" />
+            <End Role="template_subcategories" EntitySet="template_subcategories" />
           </AssociationSet>
           <AssociationSet Name="FK_Marketing_order_details_marketing_orders" Association="Self.FK_Marketing_order_details_marketing_orders">
             <End Role="marketing_orders" EntitySet="marketing_orders" />
@@ -1007,6 +1110,10 @@
             <End Role="Sys_Company" EntitySet="Sys_Company" />
             <End Role="Tb_Marketing" EntitySet="Tb_Marketing" />
           </AssociationSet>
+          <AssociationSet Name="FK_Tb_Process_Tb_Customers" Association="Self.FK_Tb_Process_Tb_Customers">
+            <End Role="Tb_Customers" EntitySet="Tb_Customers" />
+            <End Role="Tb_Process" EntitySet="Tb_Process" />
+          </AssociationSet>
           <AssociationSet Name="FK_Tb_Reminders_Sys_Users" Association="Self.FK_Tb_Reminders_Sys_Users">
             <End Role="Sys_Users" EntitySet="Sys_Users" />
             <End Role="Tb_Reminders" EntitySet="Tb_Reminders" />
@@ -1019,8 +1126,12 @@
             <End Role="Template_categories" EntitySet="Template_categories" />
             <End Role="Template_Details" EntitySet="Template_Details" />
           </AssociationSet>
+          <AssociationSet Name="FK_Template_Details_Template_Details" Association="Self.FK_Template_Details_Template_Details">
+            <End Role="Template_Details" EntitySet="Template_Details" />
+            <End Role="Template_Details1" EntitySet="Template_Details" />
+          </AssociationSet>
           <AssociationSet Name="FK_Template_Details_Template_type" Association="Self.FK_Template_Details_Template_type">
-            <End Role="Template_type" EntitySet="Template_type" />
+            <End Role="template_subcategories" EntitySet="template_subcategories" />
             <End Role="Template_Details" EntitySet="Template_Details" />
           </AssociationSet>
           <AssociationSet Name="FK_Template_dimensions_Template_type" Association="Self.FK_Template_dimensions_Template_type">
@@ -1086,7 +1197,7 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="template" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="name" Type="String" MaxLength="25" FixedLength="true" Unicode="true" Nullable="false" />
-          <Property Name="description" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="description" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="p_top" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="p_bottom" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="p_right" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
@@ -1255,6 +1366,8 @@
           <NavigationProperty Name="Saved_Templates" Relationship="Self.FK_Templates_Template_category" FromRole="Template_categories" ToRole="Saved_Templates" />
           <NavigationProperty Name="Template_Details" Relationship="Self.FK_Template_Details_Template_categories" FromRole="Template_categories" ToRole="Template_Details" />
           <NavigationProperty Name="T_Company_Type" Relationship="Realstate_agentsModel.FK_T_Company_Type_Template_categories" FromRole="Template_categories" ToRole="T_Company_Type" />
+          <Property Name="childs" Type="Boolean" />
+          <NavigationProperty Name="template_subcategories" Relationship="Realstate_agentsModel.FK_market_subCateg_type_Market_Categ_type" FromRole="Template_categories" ToRole="template_subcategories" />
         </EntityType>
         <EntityType Name="Template_Details">
           <Key>
@@ -1300,6 +1413,11 @@
           <Property Name="pic_round" Type="Boolean" />
           <Property Name="instagram" Type="Boolean" />
           <Property Name="facebook" Type="Boolean" />
+          <Property Name="subcategories" Type="Int32" />
+          <Property Name="back" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Template_Details1" Relationship="Realstate_agentsModel.FK_Template_Details_Template_Details" FromRole="Template_Details" ToRole="Template_Details1" />
+          <NavigationProperty Name="Template_Details2" Relationship="Realstate_agentsModel.FK_Template_Details_Template_Details" FromRole="Template_Details1" ToRole="Template_Details" />
+          <NavigationProperty Name="template_subcategories" Relationship="Realstate_agentsModel.FK_Template_Details_Template_type1" FromRole="Template_Details" ToRole="template_subcategories" />
         </EntityType>
         <EntityType Name="Template_type">
           <Key>
@@ -1310,6 +1428,7 @@
           <NavigationProperty Name="Template_Details" Relationship="Self.FK_Template_Details_Template_type" FromRole="Template_type" ToRole="Template_Details" />
           <NavigationProperty Name="Template_dimensions" Relationship="Realstate_agentsModel.FK_Template_dimensions_Template_type" FromRole="Template_type" ToRole="Template_dimensions" />
           <NavigationProperty Name="Saved_Templates" Relationship="Realstate_agentsModel.FK_Saved_Templates_Template_type" FromRole="Template_type" ToRole="Saved_Templates" />
+          <Property Name="path" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_crTb_OrderDetails_crTb_Orders">
           <End Role="Sys_Company" Type="Self.Sys_Company" Multiplicity="0..1">
@@ -1636,6 +1755,25 @@
           <AssociationSet Name="FK_T_Company_Type_Template_categories" Association="Realstate_agentsModel.FK_T_Company_Type_Template_categories">
             <End Role="Template_categories" EntitySet="Template_categories" />
             <End Role="T_Company_Type" EntitySet="T_Company_Type" />
+          </AssociationSet>
+          <EntitySet Name="template_subcategories" EntityType="Realstate_agentsModel.template_subcategories" />
+          <AssociationSet Name="FK_market_subCateg_type_Market_Categ_type" Association="Realstate_agentsModel.FK_market_subCateg_type_Market_Categ_type">
+            <End Role="Template_categories" EntitySet="Template_categories" />
+            <End Role="template_subcategories" EntitySet="template_subcategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Template_Details_Template_Details" Association="Realstate_agentsModel.FK_Template_Details_Template_Details">
+            <End Role="Template_Details" EntitySet="Template_Details" />
+            <End Role="Template_Details1" EntitySet="Template_Details" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Template_Details_Template_type1" Association="Realstate_agentsModel.FK_Template_Details_Template_type1">
+            <End Role="template_subcategories" EntitySet="template_subcategories" />
+            <End Role="Template_Details" EntitySet="Template_Details" />
+          </AssociationSet>
+          <EntitySet Name="Market_Categ_type" EntityType="Realstate_agentsModel.Market_Categ_type" />
+          <EntitySet Name="Tb_Process" EntityType="Realstate_agentsModel.Tb_Process" />
+          <AssociationSet Name="FK_Tb_Process_Tb_Customers" Association="Realstate_agentsModel.FK_Tb_Process_Tb_Customers">
+            <End Role="Tb_Customers" EntitySet="Tb_Customers" />
+            <End Role="Tb_Process" EntitySet="Tb_Process" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Billing_Shipping_details">
@@ -2118,6 +2256,7 @@
           <Property Name="Source" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
           <Property Name="ID_team" Type="Int32" />
           <NavigationProperty Name="Sys_Company" Relationship="Realstate_agentsModel.FK_Tb_Customers_Sys_Company" FromRole="Tb_Customers" ToRole="Sys_Company" />
+          <NavigationProperty Name="Tb_Process" Relationship="Realstate_agentsModel.FK_Tb_Process_Tb_Customers" FromRole="Tb_Customers" ToRole="Tb_Process" />
         </EntityType>
         <Association Name="FK_Tb_Customers_Sys_Company">
           <End Type="Realstate_agentsModel.Sys_Company" Role="Sys_Company" Multiplicity="1">
@@ -2166,6 +2305,113 @@
             </Principal>
             <Dependent Role="T_Company_Type">
               <PropertyRef Name="company" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="template_subcategories">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="category_type" Type="Int32" Nullable="false" />
+          <Property Name="location" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Template_categories" Relationship="Realstate_agentsModel.FK_market_subCateg_type_Market_Categ_type" FromRole="template_subcategories" ToRole="Template_categories" />
+          <NavigationProperty Name="Template_Details" Relationship="Realstate_agentsModel.FK_Template_Details_Template_type1" FromRole="template_subcategories" ToRole="Template_Details" />
+        </EntityType>
+        <Association Name="FK_market_subCateg_type_Market_Categ_type">
+          <End Type="Realstate_agentsModel.Template_categories" Role="Template_categories" Multiplicity="1" />
+          <End Type="Realstate_agentsModel.template_subcategories" Role="template_subcategories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Template_categories">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="template_subcategories">
+              <PropertyRef Name="category_type" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Template_Details_Template_Details">
+          <End Type="Realstate_agentsModel.Template_Details" Role="Template_Details" Multiplicity="1" />
+          <End Type="Realstate_agentsModel.Template_Details" Role="Template_Details1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Template_Details">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Template_Details1">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Template_Details_Template_type1">
+          <End Type="Realstate_agentsModel.template_subcategories" Role="template_subcategories" Multiplicity="0..1" />
+          <End Type="Realstate_agentsModel.Template_Details" Role="Template_Details" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="template_subcategories">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Template_Details">
+              <PropertyRef Name="subcategories" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Market_Categ_type">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="category" Type="Int32" Nullable="false" />
+          <Property Name="subcategory" Type="Int32" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="business_card" Type="Int32" />
+          <Property Name="yard_signs" Type="Int32" />
+          <Property Name="riders" Type="Int32" />
+          <Property Name="open_house" Type="Int32" />
+          <Property Name="closing_signs" Type="Int32" />
+          <Property Name="for_sale_panels" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Tb_Process">
+          <Key>
+            <PropertyRef Name="ID_Process" />
+          </Key>
+          <Property Name="ID_Process" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ID_User" Type="Int32" Nullable="false" />
+          <Property Name="ID_Customer" Type="Int32" Nullable="false" />
+          <Property Name="ID_Property" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Property" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Purchase_price" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Commission_amount" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Commissionperc" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="Closing_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Under_contract_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Offer_accepted_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Inspection_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Stage" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Source" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="TypeofAgency" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Loan_Officer_name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Attorneys_name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Notes" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Creation_date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Last_update" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Loan_Officer_tel" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Attorneys_tel" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Tb_Customers" Relationship="Realstate_agentsModel.FK_Tb_Process_Tb_Customers" FromRole="Tb_Process" ToRole="Tb_Customers" />
+        </EntityType>
+        <Association Name="FK_Tb_Process_Tb_Customers">
+          <End Type="Realstate_agentsModel.Tb_Customers" Role="Tb_Customers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="Realstate_agentsModel.Tb_Process" Role="Tb_Process" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tb_Customers">
+              <PropertyRef Name="ID_Customer" />
+            </Principal>
+            <Dependent Role="Tb_Process">
+              <PropertyRef Name="ID_Customer" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2363,6 +2609,7 @@
           <EntitySetMapping Name="Template_categories">
             <EntityTypeMapping TypeName="Realstate_agentsModel.Template_categories">
               <MappingFragment StoreEntitySet="Template_categories">
+                <ScalarProperty Name="childs" ColumnName="childs" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="category" ColumnName="category" />
                 <ScalarProperty Name="path" ColumnName="path" />
@@ -2372,6 +2619,8 @@
           <EntitySetMapping Name="Template_Details">
             <EntityTypeMapping TypeName="Realstate_agentsModel.Template_Details">
               <MappingFragment StoreEntitySet="Template_Details">
+                <ScalarProperty Name="back" ColumnName="back" />
+                <ScalarProperty Name="subcategories" ColumnName="subcategories" />
                 <ScalarProperty Name="facebook" ColumnName="facebook" />
                 <ScalarProperty Name="instagram" ColumnName="instagram" />
                 <ScalarProperty Name="pic_round" ColumnName="pic_round" />
@@ -2410,6 +2659,7 @@
           <EntitySetMapping Name="Template_type">
             <EntityTypeMapping TypeName="Realstate_agentsModel.Template_type">
               <MappingFragment StoreEntitySet="Template_type">
+                <ScalarProperty Name="path" ColumnName="path" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="type" ColumnName="type" />
               </MappingFragment>
@@ -2615,6 +2865,63 @@
                 <ScalarProperty Name="company" ColumnName="company" />
                 <ScalarProperty Name="type" ColumnName="type" />
                 <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="template_subcategories">
+            <EntityTypeMapping TypeName="Realstate_agentsModel.template_subcategories">
+              <MappingFragment StoreEntitySet="template_subcategories">
+                <ScalarProperty Name="location" ColumnName="location" />
+                <ScalarProperty Name="category_type" ColumnName="category_type" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Market_Categ_type">
+            <EntityTypeMapping TypeName="Realstate_agentsModel.Market_Categ_type">
+              <MappingFragment StoreEntitySet="Market_Categ_type">
+                <ScalarProperty Name="for_sale_panels" ColumnName="for_sale_panels" />
+                <ScalarProperty Name="closing_signs" ColumnName="closing_signs" />
+                <ScalarProperty Name="open_house" ColumnName="open_house" />
+                <ScalarProperty Name="riders" ColumnName="riders" />
+                <ScalarProperty Name="yard_signs" ColumnName="yard_signs" />
+                <ScalarProperty Name="business_card" ColumnName="business_card" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="subcategory" ColumnName="subcategory" />
+                <ScalarProperty Name="category" ColumnName="category" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tb_Process">
+            <EntityTypeMapping TypeName="Realstate_agentsModel.Tb_Process">
+              <MappingFragment StoreEntitySet="Tb_Process">
+                <ScalarProperty Name="Attorneys_tel" ColumnName="Attorneys_tel" />
+                <ScalarProperty Name="Loan_Officer_tel" ColumnName="Loan_Officer_tel" />
+                <ScalarProperty Name="Last_update" ColumnName="Last_update" />
+                <ScalarProperty Name="Creation_date" ColumnName="Creation_date" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="Attorneys_name" ColumnName="Attorneys_name" />
+                <ScalarProperty Name="Loan_Officer_name" ColumnName="Loan_Officer_name" />
+                <ScalarProperty Name="TypeofAgency" ColumnName="TypeofAgency" />
+                <ScalarProperty Name="Source" ColumnName="Source" />
+                <ScalarProperty Name="Stage" ColumnName="Stage" />
+                <ScalarProperty Name="Inspection_date" ColumnName="Inspection_date" />
+                <ScalarProperty Name="Offer_accepted_date" ColumnName="Offer_accepted_date" />
+                <ScalarProperty Name="Under_contract_date" ColumnName="Under_contract_date" />
+                <ScalarProperty Name="Closing_date" ColumnName="Closing_date" />
+                <ScalarProperty Name="Commissionperc" ColumnName="Commissionperc" />
+                <ScalarProperty Name="Commission_amount" ColumnName="Commission_amount" />
+                <ScalarProperty Name="Purchase_price" ColumnName="Purchase_price" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Property" ColumnName="Property" />
+                <ScalarProperty Name="ID_Property" ColumnName="ID_Property" />
+                <ScalarProperty Name="ID_Customer" ColumnName="ID_Customer" />
+                <ScalarProperty Name="ID_User" ColumnName="ID_User" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ID_Process" ColumnName="ID_Process" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

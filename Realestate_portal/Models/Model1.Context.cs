@@ -86,6 +86,12 @@ public partial class Realstate_agentsEntities : DbContext
 
     public virtual DbSet<T_Company_Type> T_Company_Type { get; set; }
 
+    public virtual DbSet<template_subcategories> template_subcategories { get; set; }
+
+    public virtual DbSet<Market_Categ_type> Market_Categ_type { get; set; }
+
+    public virtual DbSet<Tb_Process> Tb_Process { get; set; }
+
 }
 
 }

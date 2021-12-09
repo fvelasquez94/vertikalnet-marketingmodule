@@ -60,7 +60,53 @@ namespace Realestate_portal.Services.Repositories
             var properties = 0;
             var projectedGains = "";
             var gain="";
-        
+
+            if (GetUserRole().Contains("Agent"))
+            {                
+                var propertiesprojectedgains = (from f in db.Tb_Process where (f.ID_User == activeuser.ID_User && f.Stage == "ON CONTRACT") select f).ToList();
+                var propertiesgains = (from f in db.Tb_Process where (f.ID_User == activeuser.ID_User && f.Stage == "CLOSED") select f).ToList();
+                var totalproperties = (from f in db.Tb_Process where (f.ID_User == activeuser.ID_User) select f).Count();
+
+                decimal totalprojectedgains = 0;
+                decimal totalgains = 0;
+                if (propertiesprojectedgains.Count > 0) { totalprojectedgains = propertiesprojectedgains.Select(c => c.Commission_amount).Sum(); }
+                if (propertiesgains.Count > 0) { totalgains = propertiesgains.Select(c => c.Commission_amount).Sum(); }
+                
+                properties = totalproperties;
+                projectedGains = totalprojectedgains.ToString("N2");
+                gain = totalgains.ToString("N2");
+            }
+            else
+            {
+                if (GetUserRole().Contains("Admin"))
+                {                   
+                    var companyusers = (from c in db.Sys_Users.Where(c => c.ID_Company == activeuser.ID_Company) select c).ToList();
+
+                    decimal comission = 0;
+                    decimal gains = 0;
+                    int totalcustomer = 0;
+
+                    foreach (var user in companyusers)
+                    {
+                        var listComission = (from f in db.Tb_Process.Where(f => f.ID_User == user.ID_User && f.Stage == "ON CONTRACT") select f).ToList();
+                        if (listComission.Count > 0) { comission += listComission.Select(c => c.Commission_amount).Sum(); }
+
+                        var listgains = (from f in db.Tb_Process where (f.ID_User == user.ID_User && f.Stage == "CLOSED") select f).ToList();
+                        if (listgains.Count > 0) { gains += listgains.Select(c => c.Commission_amount).Sum(); }
+                        totalcustomer += (from f in db.Tb_Process where (f.ID_User == user.ID_User) select f).Count();
+                    }
+
+                     properties = totalcustomer;
+                     projectedGains = comission.ToString("N2");
+                     gain = gains.ToString("N2");                 
+                }
+                else
+                {
+                    properties = 0;
+                    projectedGains = "0.00";
+                    gain = "0.00";
+                }
+            }           
             return (properties, projectedGains, gain);
         }
 

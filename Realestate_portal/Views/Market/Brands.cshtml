@@ -1,20 +1,20 @@
-﻿
+﻿@model List<Realestate_portal.Models.Template_categories>
+
 @{
     ViewBag.Title = "Categories";
     Layout = "~/Views/Shared/_CRM_Marketing.cshtml";
 }
 
 <style>
-    .brand-1 {      
-        background-color: black;       
-        font-weight: bold;               
+    .brand-1 {
+        background-color: black;
+        font-weight: bold;
         font-size: 25px;
-        border-width: 5px;
+        border-width: 3px;
         border-style: solid;
         border-color: antiquewhite;
-        padding: 0;
+        text-align: center;
         box-shadow: rgba(0,0,0,0.2) 5px 5px 7px;
-        text-align:center;        
     }
 
 
@@ -31,20 +31,19 @@
     }
 
     .item-brands {
-        width: 400px;
+        width: 300px;
         position: relative;
         height: 150px;
-
+        margin-bottom: 40px;
+        margin-right:20px;
     }
 
     .image{
         display:flex;
-        flex-direction:column;
-        align-items:center;
-        justify-content:center;
+        flex-direction:column;        
+        align-items:center;      
         width:100%;
-        color:white;
-        margin:auto;
+        color:white;       
     }
 
     .message {
@@ -76,13 +75,24 @@
         color:white;
     }
 
+
+    .flex-container {
+        display: flex;
+        flex-flow: row wrap;
+        width: 100%;
+        justify-content: center;
+        justify-items: center;
+        padding: 10px;
+        align-content: space-around;
+    }
+
 </style>
 <br />
 <div class="row">
     <div class="col-12">
         <nav aria-label="breadcrumb" class="float-left">
             <ol class="breadcrumb">
-          
+                <li class="breadcrumb-item"><a href="@Url.Action("Dashboard", "Portal", new {broker=0 })">Home</a></li>
                 <li class="breadcrumb-item"><a href="@Url.Action("Index","Market")">Market</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Brands</li>
             </ol>
@@ -90,46 +100,41 @@
         @Html.Partial("Utilities/ShoppingCart")
     </div>
 </div>
-
-<div class="container mt-3">
-    <div class="row mt-5">
+<div class="container mt-1">
+    <div class="row">
         <div class="col-md-12  text-center">
             <h1 style="font-weight: bold; color: black ">Available Brands</h1>
             <br />
         </div>
     </div>
-    <br />
-    <br />
-    <br />
     <div class="row">
         <div class="col-md-1 col-sm-12"></div>
-        <div class="col-md-5 col-sm-12">
+        <div class="flex-container">
             <a href="@Url.Action("Shop","Market", new {id=7 })">
                 <div class="item-brands brand-1">
                     <br />
-                    <div class="image mt-3"> Independent Realtor ©</div>
+                    <div class="image mt-3"> Independent ©</div>
                     <div class="message">
                         <p class="m-label">Click to see details</p>
                     </div>
 
                 </div>
             </a>
+            @foreach (var item in Model)
+            {
+                <a href="@Url.Action("Categories","Market", new {id=item.id, child=item.childs})">
+                    <div class="item-brands brand-2">                      
+                        <div class="image mt-3">
+                            <img class="logo-big" src="~/@item.path" alt="PGR" width="200" height="120" />
+                        </div>
+                        <div class="message">
+                            <p class="m-label">Click to see details</p>
+                        </div>
+                    </div>
+                </a>
+            }
 
         </div>
-        <div class="col-md-5 col-sm-12">
-            <a href="@Url.Action("Companies","Market")">
-                <div class="item-brands brand-2">
-                    <br />
-                    <div class="image mt-3">
-                        <img class="logo-big" src="~/Content/pgrlogos/S7VENLogoBlack.png" alt="PGR" width="100" />
-                    </div>
-                    <div class="message">
-                        <p class="m-label">Click to see details</p>
-                    </div>
-                </div>
-            </a>
-
-        </div>      
     </div>
 
 </div>

@@ -69,6 +69,13 @@
         <EntityTypeShape EntityType="Realstate_agentsModel.T_Company_Type" Width="1.5" PointX="5.25" PointY="18.375" />
         <AssociationConnector Association="Realstate_agentsModel.FK_T_Company_Type_T_Company_Type" />
         <AssociationConnector Association="Realstate_agentsModel.FK_T_Company_Type_Template_categories" />
+        <EntityTypeShape EntityType="Realstate_agentsModel.template_subcategories" Width="1.5" PointX="5.25" PointY="21.75" />
+        <AssociationConnector Association="Realstate_agentsModel.FK_market_subCateg_type_Market_Categ_type" />
+        <AssociationConnector Association="Realstate_agentsModel.FK_Template_Details_Template_Details" />
+        <AssociationConnector Association="Realstate_agentsModel.FK_Template_Details_Template_type1" />
+        <EntityTypeShape EntityType="Realstate_agentsModel.Market_Categ_type" Width="1.5" PointX="7.375" PointY="9.75" />
+        <EntityTypeShape EntityType="Realstate_agentsModel.Tb_Process" Width="1.5" PointX="5.25" PointY="54.75" />
+        <AssociationConnector Association="Realstate_agentsModel.FK_Tb_Process_Tb_Customers" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

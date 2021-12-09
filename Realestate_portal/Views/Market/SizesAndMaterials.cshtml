@@ -21,7 +21,7 @@
     <div class="col-12">
         <nav aria-label="breadcrumb" class="float-left">
             <ol class="breadcrumb">
-          
+                <li class="breadcrumb-item"><a href="@Url.Action("Dashboard", "Portal", new {broker=0 })">Home</a></li>
                 <li class="breadcrumb-item"><a href="@Url.Action("Index","Market")">Market</a></li>
                 <li class="breadcrumb-item"><a href="@Url.Action("brands","Market")">Brands</a></li>
                 <li class="breadcrumb-item"><a href="@Url.Action("Categories","Market")">Categories</a></li>
@@ -76,6 +76,7 @@
                     </div>
                     <select name="Material" class="custom-select" id="dimension">
                         <option value="0" selected>Choose...</option>
+                        <option value="10" selected>test-one</option>
                         @foreach (var item in ViewBag.dimensions)
                         {
                             <option value="@item">@item</option>
@@ -96,6 +97,7 @@
                             </div>
                             <select name="amount" class="custom-select" id="amount">
                                 <option value="0" selected>Choose a type first</option>
+                                <option value="10" selected>test-one</option>
                             </select>
                         </div>
                         <div><span style="color:red" id="wngamount"></span> </div>

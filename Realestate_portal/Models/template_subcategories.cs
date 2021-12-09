@@ -15,41 +15,33 @@ namespace Realestate_portal.Models
 using System;
     using System.Collections.Generic;
     
-public partial class Template_type
+public partial class template_subcategories
 {
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-    public Template_type()
+    public template_subcategories()
     {
 
         this.Template_Details = new HashSet<Template_Details>();
-
-        this.Template_dimensions = new HashSet<Template_dimensions>();
-
-        this.Saved_Templates = new HashSet<Saved_Templates>();
 
     }
 
 
     public int id { get; set; }
 
-    public string type { get; set; }
+    public string name { get; set; }
 
-    public string path { get; set; }
+    public int category_type { get; set; }
+
+    public string location { get; set; }
 
 
+
+    public virtual Template_categories Template_categories { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<Template_Details> Template_Details { get; set; }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<Template_dimensions> Template_dimensions { get; set; }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<Saved_Templates> Saved_Templates { get; set; }
 
 }
 

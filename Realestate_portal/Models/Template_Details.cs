@@ -101,6 +101,10 @@ public partial class Template_Details
 
     public Nullable<bool> facebook { get; set; }
 
+    public Nullable<int> subcategories { get; set; }
+
+    public string back { get; set; }
+
 
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -130,6 +134,12 @@ public partial class Template_Details
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<Template_colors> Template_colors { get; set; }
+
+    public virtual Template_Details Template_Details1 { get; set; }
+
+    public virtual Template_Details Template_Details2 { get; set; }
+
+    public virtual template_subcategories template_subcategories { get; set; }
 
 }
 

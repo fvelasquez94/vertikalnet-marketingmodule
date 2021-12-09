@@ -79,7 +79,7 @@
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="template" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="name" Type="nchar" MaxLength="25" Nullable="false" />
-    <Property Name="description" Type="nchar" MaxLength="50" />
+    <Property Name="description" Type="varchar" MaxLength="250" />
     <Property Name="p_top" Type="nchar" MaxLength="10" />
     <Property Name="p_bottom" Type="nchar" MaxLength="10" />
     <Property Name="p_right" Type="nchar" MaxLength="10" />
@@ -95,6 +95,22 @@
     <Property Name="font_weight" Type="nchar" MaxLength="20" />
     <Property Name="text_position" Type="nchar" MaxLength="20" />
     <Property Name="shape" Type="varchar" MaxLength="25" />
+  </EntityType>
+  <EntityType Name="Market_Categ_type">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="category" Type="int" Nullable="false" />
+    <Property Name="subcategory" Type="int" />
+    <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="description" Type="varchar(max)" />
+    <Property Name="business_card" Type="int" />
+    <Property Name="yard_signs" Type="int" />
+    <Property Name="riders" Type="int" />
+    <Property Name="open_house" Type="int" />
+    <Property Name="closing_signs" Type="int" />
+    <Property Name="for_sale_panels" Type="int" />
   </EntityType>
   <EntityType Name="Marketing_order_details">
     <Key>
@@ -331,6 +347,35 @@
     <Property Name="Comments" Type="int" Nullable="false" />
     <Property Name="T_image" Type="varchar(max)" Nullable="false" />
   </EntityType>
+  <EntityType Name="Tb_Process">
+    <Key>
+      <PropertyRef Name="ID_Process" />
+    </Key>
+    <Property Name="ID_Process" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="varchar(max)" Nullable="false" />
+    <Property Name="ID_User" Type="int" Nullable="false" />
+    <Property Name="ID_Customer" Type="int" Nullable="false" />
+    <Property Name="ID_Property" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="Property" Type="varchar(max)" Nullable="false" />
+    <Property Name="Address" Type="varchar(max)" Nullable="false" />
+    <Property Name="Purchase_price" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Commission_amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Commissionperc" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Closing_date" Type="datetime" Nullable="false" />
+    <Property Name="Under_contract_date" Type="datetime" Nullable="false" />
+    <Property Name="Offer_accepted_date" Type="datetime" Nullable="false" />
+    <Property Name="Inspection_date" Type="datetime" Nullable="false" />
+    <Property Name="Stage" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="Source" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="TypeofAgency" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="Loan_Officer_name" Type="varchar(max)" Nullable="false" />
+    <Property Name="Attorneys_name" Type="varchar(max)" Nullable="false" />
+    <Property Name="Notes" Type="varchar(max)" Nullable="false" />
+    <Property Name="Creation_date" Type="datetime" Nullable="false" />
+    <Property Name="Last_update" Type="datetime" Nullable="false" />
+    <Property Name="Loan_Officer_tel" Type="varchar" MaxLength="150" Nullable="false" />
+    <Property Name="Attorneys_tel" Type="varchar" MaxLength="150" Nullable="false" />
+  </EntityType>
   <EntityType Name="Tb_Reminders">
     <Key>
       <PropertyRef Name="ID_Reminder" />
@@ -345,6 +390,7 @@
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="category" Type="nchar" MaxLength="25" Nullable="false" />
     <Property Name="path" Type="varchar" MaxLength="100" />
+    <Property Name="childs" Type="bit" />
   </EntityType>
   <EntityType Name="Template_colors">
     <Key>
@@ -361,6 +407,8 @@
     </Key>
     <Property Name="id" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="category" Type="int" Nullable="false" />
+    <Property Name="subcategories" Type="int" />
+    <Property Name="type" Type="int" />
     <Property Name="path" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="width" Type="varchar" MaxLength="20" Nullable="false" />
     <Property Name="height" Type="varchar" MaxLength="20" Nullable="false" />
@@ -388,9 +436,9 @@
     <Property Name="saved_width" Type="varchar" MaxLength="20" />
     <Property Name="saved_height" Type="varchar" MaxLength="20" />
     <Property Name="logo_path" Type="varchar" MaxLength="100" />
-    <Property Name="type" Type="int" />
     <Property Name="price" Type="decimal" Precision="18" Scale="2" />
     <Property Name="pic_round" Type="bit" />
+    <Property Name="back" Type="varchar(max)" />
   </EntityType>
   <EntityType Name="Template_dimensions">
     <Key>
@@ -409,12 +457,22 @@
     <Property Name="dimensions" Type="int" Nullable="false" />
     <Property Name="quantity" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="template_subcategories">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="category_type" Type="int" Nullable="false" />
+    <Property Name="location" Type="varchar(max)" Nullable="false" />
+  </EntityType>
   <EntityType Name="Template_type">
     <Key>
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="type" Type="nchar" MaxLength="20" Nullable="false" />
+    <Property Name="path" Type="varchar(max)" />
   </EntityType>
   <Association Name="FK_Billing_Shipping_details_marketing_orders">
     <End Role="marketing_orders" Type="Self.marketing_orders" Multiplicity="0..1" />
@@ -499,6 +557,18 @@
       </Principal>
       <Dependent Role="labels">
         <PropertyRef Name="template" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_market_subCateg_type_Market_Categ_type">
+    <End Role="Template_categories" Type="Self.Template_categories" Multiplicity="1" />
+    <End Role="template_subcategories" Type="Self.template_subcategories" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Template_categories">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="template_subcategories">
+        <PropertyRef Name="category_type" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -764,6 +834,20 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Tb_Process_Tb_Customers">
+    <End Role="Tb_Customers" Type="Self.Tb_Customers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Tb_Process" Type="Self.Tb_Process" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tb_Customers">
+        <PropertyRef Name="ID_Customer" />
+      </Principal>
+      <Dependent Role="Tb_Process">
+        <PropertyRef Name="ID_Customer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Tb_Reminders_Sys_Users">
     <End Role="Sys_Users" Type="Self.Sys_Users" Multiplicity="1">
       <OnDelete Action="Cascade" />
@@ -802,15 +886,27 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Template_Details_Template_Details">
+    <End Role="Template_Details" Type="Self.Template_Details" Multiplicity="1" />
+    <End Role="Template_Details1" Type="Self.Template_Details" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Template_Details">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Template_Details1">
+        <PropertyRef Name="id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Template_Details_Template_type">
-    <End Role="Template_type" Type="Self.Template_type" Multiplicity="0..1" />
+    <End Role="template_subcategories" Type="Self.template_subcategories" Multiplicity="0..1" />
     <End Role="Template_Details" Type="Self.Template_Details" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Template_type">
+      <Principal Role="template_subcategories">
         <PropertyRef Name="id" />
       </Principal>
       <Dependent Role="Template_Details">
-        <PropertyRef Name="type" />
+        <PropertyRef Name="subcategories" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -868,6 +964,7 @@
     <EntitySet Name="crTb_Orders" EntityType="Self.crTb_Orders" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="label_color" EntityType="Self.label_color" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="labels" EntityType="Self.labels" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Market_Categ_type" EntityType="Self.Market_Categ_type" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Marketing_order_details" EntityType="Self.Marketing_order_details" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="marketing_orders" EntityType="Self.marketing_orders" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Payment_Intent" EntityType="Self.Payment_Intent" Schema="dbo" store:Type="Tables" />
@@ -883,12 +980,14 @@
     <EntitySet Name="T_Company_Type" EntityType="Self.T_Company_Type" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Tb_Customers" EntityType="Self.Tb_Customers" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Tb_Marketing" EntityType="Self.Tb_Marketing" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tb_Process" EntityType="Self.Tb_Process" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Tb_Reminders" EntityType="Self.Tb_Reminders" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Template_categories" EntityType="Self.Template_categories" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Template_colors" EntityType="Self.Template_colors" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Template_Details" EntityType="Self.Template_Details" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Template_dimensions" EntityType="Self.Template_dimensions" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="template_pricing" EntityType="Self.template_pricing" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="template_subcategories" EntityType="Self.template_subcategories" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Template_type" EntityType="Self.Template_type" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_Billing_Shipping_details_marketing_orders" Association="Self.FK_Billing_Shipping_details_marketing_orders">
       <End Role="marketing_orders" EntitySet="marketing_orders" />
@@ -917,6 +1016,10 @@
     <AssociationSet Name="FK_labels_Templates" Association="Self.FK_labels_Templates">
       <End Role="Template_Details" EntitySet="Template_Details" />
       <End Role="labels" EntitySet="labels" />
+    </AssociationSet>
+    <AssociationSet Name="FK_market_subCateg_type_Market_Categ_type" Association="Self.FK_market_subCateg_type_Market_Categ_type">
+      <End Role="Template_categories" EntitySet="Template_categories" />
+      <End Role="template_subcategories" EntitySet="template_subcategories" />
     </AssociationSet>
     <AssociationSet Name="FK_Marketing_order_details_marketing_orders" Association="Self.FK_Marketing_order_details_marketing_orders">
       <End Role="marketing_orders" EntitySet="marketing_orders" />
@@ -1002,6 +1105,10 @@
       <End Role="Sys_Company" EntitySet="Sys_Company" />
       <End Role="Tb_Marketing" EntitySet="Tb_Marketing" />
     </AssociationSet>
+    <AssociationSet Name="FK_Tb_Process_Tb_Customers" Association="Self.FK_Tb_Process_Tb_Customers">
+      <End Role="Tb_Customers" EntitySet="Tb_Customers" />
+      <End Role="Tb_Process" EntitySet="Tb_Process" />
+    </AssociationSet>
     <AssociationSet Name="FK_Tb_Reminders_Sys_Users" Association="Self.FK_Tb_Reminders_Sys_Users">
       <End Role="Sys_Users" EntitySet="Sys_Users" />
       <End Role="Tb_Reminders" EntitySet="Tb_Reminders" />
@@ -1014,8 +1121,12 @@
       <End Role="Template_categories" EntitySet="Template_categories" />
       <End Role="Template_Details" EntitySet="Template_Details" />
     </AssociationSet>
+    <AssociationSet Name="FK_Template_Details_Template_Details" Association="Self.FK_Template_Details_Template_Details">
+      <End Role="Template_Details" EntitySet="Template_Details" />
+      <End Role="Template_Details1" EntitySet="Template_Details" />
+    </AssociationSet>
     <AssociationSet Name="FK_Template_Details_Template_type" Association="Self.FK_Template_Details_Template_type">
-      <End Role="Template_type" EntitySet="Template_type" />
+      <End Role="template_subcategories" EntitySet="template_subcategories" />
       <End Role="Template_Details" EntitySet="Template_Details" />
     </AssociationSet>
     <AssociationSet Name="FK_Template_dimensions_Template_type" Association="Self.FK_Template_dimensions_Template_type">

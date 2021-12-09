@@ -29,9 +29,66 @@ namespace Realestate_portal.Services.Repositories
         }
 
         //gets all categories of templates
-        public List<Template_categories>  getCategories()
+        public List<Template_type>  getCategories(int category, int subcategory=0 )
         {
-            return (from c in _db.Template_categories where c.category!= "Independent Realtor" select c).ToList();
+            Market_Categ_type Cat_type = null;
+            List<Template_type> types = new List<Template_type>();
+            Template_type type = null;
+            if (subcategory != 0)
+            {
+                 Cat_type = _db.Market_Categ_type.Where(c => c.category == category && c.subcategory == subcategory).FirstOrDefault();
+            }
+            else
+            {
+                 Cat_type= _db.Market_Categ_type.Where(c => c.category == category).FirstOrDefault();
+            }
+
+            if (Cat_type.yard_signs != 0)
+            {
+                type = _db.Template_type.Where(t => t.id == Cat_type.yard_signs).FirstOrDefault();
+                types.Add(type);
+            }
+
+            if (Cat_type.business_card != 0)
+            {
+                type = _db.Template_type.Where(t => t.id == Cat_type.business_card).FirstOrDefault();
+                types.Add(type);
+            }
+
+            if (Cat_type.closing_signs != 0)
+            {
+                type = _db.Template_type.Where(t => t.id == Cat_type.closing_signs).FirstOrDefault();
+                types.Add(type);
+            }
+
+            if (Cat_type.open_house != 0)
+            {
+                type = _db.Template_type.Where(t => t.id == Cat_type.open_house).FirstOrDefault();
+                types.Add(type);
+            }
+
+
+            if (Cat_type.riders != 0)
+            {
+                type = _db.Template_type.Where(t => t.id == Cat_type.riders).FirstOrDefault();
+                types.Add(type);
+            }
+
+            if (Cat_type.for_sale_panels != 0)
+            {
+                type = _db.Template_type.Where(t => t.id == Cat_type.for_sale_panels).FirstOrDefault();
+                types.Add(type);
+            }
+
+            return types;
+
+
+        }
+
+
+        public List<template_subcategories> getSubcategories(int id)
+        {
+            return _db.template_subcategories.Where(s => s.category_type == id).ToList();
         }
 
         //get the id of category of the template using the templateid
@@ -43,9 +100,20 @@ namespace Realestate_portal.Services.Repositories
         }
 
         //it returns a list of template_layout with the name and path of the template
-        public List<Template_Layout> getTemplatesLayout(int company,int type)
+        public List<Template_Layout> getTemplatesLayout(int company,int type, int subcategory=0)
         {
-           var list= (from c in _db.Template_Details where c.category== company && c.type==type select new Template_Layout {Name=c.id, Path=c.path }).ToList();
+            List<Template_Layout> list = new List<Template_Layout>();
+            if (subcategory != 0)
+            {
+                 list = (from c in _db.Template_Details where c.category == company && c.type == type && c.subcategories==subcategory select new Template_Layout { Name = c.id, Path = c.path }).ToList();
+
+            }
+            else
+            {
+                 list = (from c in _db.Template_Details where c.category == company && c.type == type select new Template_Layout { Name = c.id, Path = c.path }).ToList();
+
+            }
+
             return list;
         }
 
@@ -1428,5 +1496,11 @@ namespace Realestate_portal.Services.Repositories
             return colors;
         }
 
+
+        public List<Template_categories> GetBrandstCategories()
+        {
+            return _db.Template_categories.Where(c=>c.id!=7).ToList();
+
+        }
     }
 }
