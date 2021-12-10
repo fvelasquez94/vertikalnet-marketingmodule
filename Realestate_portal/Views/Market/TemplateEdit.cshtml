@@ -2,7 +2,7 @@
 @model TemplateCanvas
 @{
     ViewBag.Title = "TemplateEdit";
-    Layout = "~/Views/Shared/_CRM_Marketing.cshtml";
+  
 }
 
 
@@ -473,168 +473,168 @@
         left: 150px;
     }
 </style>
-<br />
-<div class="row">
-    <div class="col-12">
-        <nav aria-label="breadcrumb" class="float-left">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="@Url.Action("Dashboard", "Portal", new {broker=0 })">Home</a></li>
-                <li class="breadcrumb-item"><a href="@Url.Action("Index","Market")">Market</a></li>
-                <li class="breadcrumb-item"><a href="@Url.Action("brands","Market")">Brands</a></li>
-                <li class="breadcrumb-item"><a href="@Url.Action("Categories","Market")">Categories</a></li>
-                <li class="breadcrumb-item"><a href="@Url.Action("Categories","Market")">Template</a></li>
-                <li class="breadcrumb-item active"> <a href="@Url.Action("SizesAndMaterials","Market")"> Size and Materials</a></li>
-                <li class="breadcrumb-item active" aria-current="page"> Customize it</li>
-            </ol>
-        </nav>
-        @Html.Partial("Utilities/ShoppingCart")
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-12  text-center">
-        <div style="float: right">
-            <h2 style="font-weight: bold; color: black ">Personalize it at your own</h2>
-        </div>
-    </div>
-</div>
-<br />
-<div class="row">
-    <div class="col-12 float-left">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a style="font-weight: bold; color: #236386"><i class="fas fa-check"></i> Select a template</a></li>
-                <li class="breadcrumb-item" aria-current="page" style="font-weight: bold; color: #236386"><i class="fas fa-check"></i> Select size and materials</li>
-                <li class="breadcrumb-item" aria-current="page" style="font-weight: bold; color: darkgreen"><i class="fas fa-circle"></i> Customize it</li>
-            </ol>
-        </nav>
-    </div>
-</div>
-<br />
-<br />
-<div class="row">
-    <div class="col-md-2 col-sm-12">
 
+<div class="top-bar -mx-4 px-4 md:mx-0 md:px-0">
+    <!-- BEGIN: Breadcrumb -->
+    <div class="-intro-x breadcrumb mr-auto hidden sm:flex">
+        <a href="@Url.Action("Index","Market")">Market</a> <i data-feather="chevron-right" class="breadcrumb__icon"></i>
+        <a href="@Url.Action("Brands","Market")">Brands</a> <i data-feather="chevron-right" class="breadcrumb__icon"></i>
+        <a href="@Url.Action("Categories","Market")">Categories</a> <i data-feather="chevron-right" class="breadcrumb__icon"></i>
+        <a href="@Url.Action("Template","Market")">Template</a> <i data-feather="chevron-right" class="breadcrumb__icon"></i>
+        <a href="@Url.Action("SizesAndMaterials","Market")">Size and Materials</a> <i data-feather="chevron-right" class="breadcrumb__icon"></i>
+
+        <a href="#" class="breadcrumb--active">Customize it </a>
     </div>
-    <div class="col-md-8 col-sm-12">
-        <div class="info-box">
-            <div class="form-inline">
-                <div style="margin-left:10px; margin-top:10px; background-color: #236386; width: 25px; height: 25px; text-align: center" class="rounded-circle">
-                    <i style="position: relative; top: 3px; color: white" class="fas fa-info"></i>
+    <!-- END: Breadcrumb -->
+
+</div><br />
+<br />
+
+
+<br />
+<div class="grid grid-cols-12">
+    <div class="col-span-12 2xl:col-span-12">
+        <div class="container mt-1">
+            <div class="row">
+                <div class="col-md-12  text-center">
+                    <h1 style="font-weight: bold; color: black ">Personalize it at your own</h1>
+                    <br />
                 </div>
-                <h3 class="text-center"><strong style="color: #236386; position: relative; top: 15px; left: 15px"><p>How to edit your sign: </p></strong></h3>
             </div>
             <br />
-            <div class="text-center">
-                <strong>
-                    To personalize your sign, add your custom text line by line in the fields below,
-                    in the sequence you would like it to appear on your sign. You do not need to fill in every line,
-                    only those you wish you use (note: in some cases, the site will require certain fields to be filled
-                    out). Once your order is submitted, our artists will then create a proof of your sign design and email this proof to you.
-                </strong>
+            <div class="row">
+                <div class="col-12 float-left" style="margin-top:25px;margin-bottom:25px">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="@Url.Action("Template", "Market", new {broker=0 })" style="font-weight: bold; color: #236386;margin-right:10px"><i data-feather="check-circle"></i> Select a template</a></li>
+                            <li class="breadcrumb-item" aria-current="page" style="font-weight: bold; color: #236386;margin-right:10px"><i data-feather="check-circle"></i> Select size and materials</li>
+                            <li class="breadcrumb-item" aria-current="page" style="font-weight: bold; color: darkgreen;margin-right:10px"><i data-feather="check-circle"></i> Customize it</li>
+
+                        </ol>
+                    </nav>
+                </div>
             </div>
-        </div>
-    </div>
-    <div class="col-md-2 col-sm-12">
-    </div>
-</div>
-<br />
-<br />
-<div class="row">
-    <div class="col-md-1 col-sm-12"></div>
-    <div class="col-md-5 col-sm-12">
-        <ul id="colorbtns">
-            <li><button class="bubble"></button></li>
-            <li><button class="bubble"></button></li>
-            <li><button class="bubble"></button></li>
-        </ul>
-        <div id="outtercanvas" style="height:@Model.Details.height; width:@Model.Details.width">
-            <img class="shadow-lg img-bordered" src="~/@Model.Details.path" id="img" height="500" width="500" alt="Template to edit" />
-            @if (Model.Header != null)
+
+            <div class="row">
+
+                <div class="col-md-12 col-sm-12" style="margin-top:25px;margin-bottom:25px">
+                    <div class="info-box">
+                        <div class="form-inline">
+                            <div style="margin-left:10px; margin-top:10px; background-color: #236386; width: 25px; height: 25px; text-align: center" class="rounded-circle">
+                                <i style="position: relative; top: 3px; color: white" class="fas fa-info"></i>
+                            </div>
+                            <h3 class="text-center"><strong style="color: #236386; position: relative; top: 15px; left: 15px"><p>How to edit your sign: </p></strong></h3>
+                        </div>
+                        <br />
+                        <div class="text-center">
+                            <strong>
+                                To personalize your sign, add your custom text line by line in the fields below,
+                                in the sequence you would like it to appear on your sign. Once your order is submitted,
+                                our artists will then create a proof of your sign design and email this proof to you.
+                            </strong>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-1 col-sm-12"></div>
+                <div class="col-md-5 col-sm-12">
+                    <ul id="colorbtns">
+                        <li><button class="bubble"></button></li>
+                        <li><button class="bubble"></button></li>
+                        <li><button class="bubble"></button></li>
+                    </ul>
+                    <div id="outtercanvas" style="height:@Model.Details.height; width:@Model.Details.width">
+                        <img class="shadow-lg img-bordered" src="~/@Model.Details.path" id="img" height="500" width="500" alt="Template to edit" />
+                        @if (Model.Header != null)
             {
                 <h4 id="header">@Model.Header.description </h4>
                 <div id="headerid" style="display:none">@Model.Header.id</div>
-            }
-            @if (Model.Company != null)
+}
+                        @if (Model.Company != null)
             {
                 <h4 id="company">@Model.Company.description </h4>
                 <div id="companyid" style="display:none">@Model.Company.id</div>
-            }
-            @if (Model.Agent != null)
+}
+                        @if (Model.Agent != null)
             {
                 <h4 id="agent">@Model.Agent.description </h4>
                 <div id="agentid" style="display:none">@Model.Agent.id</div>
-            }
-            @if (Model.Phone != null)
+}
+                        @if (Model.Phone != null)
             {
                 <h4 id="phone">@Model.Phone.description </h4>
                 <div id="phoneid" style="display:none">@Model.Phone.id</div>
-            }
-            @if (Model.Website != null)
+}
+                        @if (Model.Website != null)
             {
                 <h4 id="website"> @Model.Website.description </h4>
                 <div id="websiteid" style="display:none">@Model.Website.id</div>
-            }
-            @if (Model.Photo != null)
+}
+                        @if (Model.Photo != null)
             {
                 <div id="photo"></div>
                 <img id="originalPhoto" src="~/@Model.Details.pic_path" />
-            }
-            @if (Model.Logo != null)
+}
+                        @if (Model.Logo != null)
             {
                 <div id="logo"></div>
                 <div id="logoid" style="display:none">@Model.Logo.id</div>
-            }
-            @if (Model.Title != null)
+}
+                        @if (Model.Title != null)
             {
                 <h4 id="title">@Model.Title.description </h4>
                 <div id="titleid" style="display:none">@Model.Title.id</div>
-            }
-            @if (Model.Email != null)
+}
+                        @if (Model.Email != null)
             {
                 <h4 id="email">@Model.Email.description </h4>
                 <div id="emailid" style="display:none">@Model.Email.id</div>
-            }
-            @if (Model.Message != null)
+}
+                        @if (Model.Message != null)
             {
                 <h4 id="message">@Model.Message.description </h4>
                 <div id="messageid" style="display:none">@Model.Message.id</div>
-            }
-            @if (Model.Other != null)
+}
+                        @if (Model.Other != null)
             {
                 <h4 id="other">@Model.Other.description </h4>
                 <div id="otherid" style="display:none">@Model.Other.id</div>
-            }
-            @if (Model.Adress_1 != null)
+}
+                        @if (Model.Adress_1 != null)
             {
                 <h4 id="adress1">@Model.Adress_1.description </h4>
                 <div id="adress1id" style="display:none">@Model.Adress_1.id</div>
-            }
-            @if (Model.Adress_2 != null)
+}
+                        @if (Model.Adress_2 != null)
             {
                 <h4 id="adress2">@Model.Adress_2.description </h4>
                 <div id="adress2id" style="display:none">@Model.Adress_2.id</div>
-            }
-            @if (Model.Facebook != null)
+}
+                        @if (Model.Facebook != null)
             {
                 <h4 id="facebook">@Model.Facebook.description </h4>
                 <div id="facebookid" style="display:none">@Model.Facebook.id</div>
-            }
-            @if (Model.Instagram != null)
+}
+                        @if (Model.Instagram != null)
             {
                 <h4 id="instagram">@Model.Instagram.description </h4>
                 <div id="instagramid" style="display:none">@Model.Instagram.id</div>
-            }
-        </div>
-        <br />
-        <br />
-    </div>
-    <div class="col-md-1 col-sm-12"></div>
-    <div class="col-md-5 col-sm-12 text-center">
-        <div class="input-group input-box text-center">
-            <h3 style="color: white"><strong>Desing : Item X</strong></h3>
-            <br />
-            <br />
-            @if (Model.Header != null)
+}
+                    </div>
+                    <br />
+                    <br />
+                </div>
+                <div class="col-md-1 col-sm-12"></div>
+                <div class="col-md-5 col-sm-12">
+                    <div class="input-box text-center">
+                        <h3 style="color: white"><strong>Desing : Item X</strong></h3>
+                        <br />
+                        <br />
+                        @if (Model.Header != null)
             {
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
@@ -643,8 +643,8 @@
                     <input id="headerlbl" style="font-weight: bold; color: black" type="text" class="form-control" placeholder="@Model.Header.description">
                 </div>
                 <br />
-            }
-            @if (Model.Company != null)
+}
+                        @if (Model.Company != null)
             {
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
@@ -653,8 +653,8 @@
                     <input id="companylbl" style="font-weight: bold; color: black" type="text" class="form-control" placeholder="@Model.Company.description">
                 </div>
                 <br />
-            }
-            @if (Model.Agent != null)
+}
+                        @if (Model.Agent != null)
             {
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
@@ -663,8 +663,8 @@
                     <input id="agentlbl" style="font-weight: bold; color: black" type="text" class="form-control" placeholder="@Model.Agent.description">
                 </div>
                 <br />
-            }
-            @if (Model.Phone != null)
+}
+                        @if (Model.Phone != null)
             {
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
@@ -673,9 +673,9 @@
                     <input id="phonelbl" style="font-weight: bold; color: black" type="text" class="form-control" placeholder="@Model.Phone.description">
                 </div>
                 <br />
-            }
+}
 
-            @if (Model.Website != null)
+                        @if (Model.Website != null)
             {
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
@@ -684,8 +684,8 @@
                     <input id="websitelbl" style="font-weight: bold; color: black" type="text" class="form-control" placeholder="@Model.Website.description">
                 </div>
                 <br />
-            }
-            @if (Model.Title != null)
+}
+                        @if (Model.Title != null)
             {
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
@@ -694,8 +694,8 @@
                     <input id="titlelbl" style="font-weight: bold; color: black" type="text" class="form-control" placeholder="@Model.Title.description">
                 </div>
                 <br />
-            }
-            @if (Model.Email != null)
+}
+                        @if (Model.Email != null)
             {
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
@@ -704,8 +704,8 @@
                     <input id="emaillbl" style="font-weight: bold; color: black" type="text" class="form-control" placeholder="@Model.Email.description">
                 </div>
                 <br />
-            }
-            @if (Model.Message != null)
+}
+                        @if (Model.Message != null)
             {
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
@@ -714,8 +714,8 @@
                     <input id="messagelbl" style="font-weight: bold; color: black" type="text" class="form-control" placeholder="@Model.Message.description">
                 </div>
                 <br />
-            }
-            @if (Model.Other != null)
+}
+                        @if (Model.Other != null)
             {
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
@@ -724,8 +724,8 @@
                     <input id="otherlbl" style="font-weight: bold; color: black" type="text" class="form-control" placeholder="@Model.Other.description">
                 </div>
                 <br />
-            }
-            @if (Model.Adress_1 != null)
+}
+                        @if (Model.Adress_1 != null)
             {
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
@@ -734,8 +734,8 @@
                     <input id="adress1lbl" style="font-weight: bold; color: black" type="text" class="form-control" placeholder="@Model.Adress_1.description">
                 </div>
                 <br />
-            }
-            @if (Model.Adress_2 != null)
+}
+                        @if (Model.Adress_2 != null)
             {
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
@@ -744,8 +744,8 @@
                     <input id="adress2lbl" style="font-weight: bold; color: black" type="text" class="form-control" placeholder="@Model.Adress_2.description">
                 </div>
                 <br />
-            }
-            @if (Model.Facebook != null)
+}
+                        @if (Model.Facebook != null)
             {
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
@@ -754,8 +754,8 @@
                     <input id="facebooklbl" style="font-weight: bold; color: black" type="text" class="form-control" placeholder="@Model.Facebook.description">
                 </div>
                 <br />
-            }
-            @if (Model.Instagram != null)
+}
+                        @if (Model.Instagram != null)
             {
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
@@ -764,9 +764,9 @@
                     <input id="instagramlbl" style="font-weight: bold; color: black" type="text" class="form-control" placeholder="@Model.Instagram.description">
                 </div>
                 <br />
-            }
+}
 
-            @if (Model.Photo != null)
+                        @if (Model.Photo != null)
             {
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
@@ -778,9 +778,9 @@
                     </div>
                 </div>
                 <br />
-            }
+}
 
-            @if (Model.Logo != null)
+                        @if (Model.Logo != null)
             {
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
@@ -792,18 +792,26 @@
                     </div>
                 </div>
                 <br />
-            }
-            <div class="form-group">
-                <textarea style="width: 475px" placeholder="Add your comments" class="form-control" id="comments" rows="5"></textarea>
+}
+                        <div class="form-group">
+                            <textarea style="width: 475px" placeholder="Add your comments" class="form-control" id="comments" rows="5"></textarea>
+                        </div>
+                        <br />
+                        <div>
+                            <button id="addedbtn" style="margin:auto; position: relative; left: 150px" class="btn btn-lg btn-light"><strong style="color: black">Add to kart <i class="fas fa-shopping-cart"></i></strong> </button>
+                        </div>
+                    </div>
+
+                </div>
             </div>
-            <br />
-            <div>
-                <button id="addedbtn" style="margin:auto; position: relative; left: 150px" class="btn btn-lg btn-light"><strong style="color: black">Add to kart <i class="fas fa-shopping-cart"></i></strong> </button>
-            </div>
+
         </div>
 
     </div>
+
 </div>
+<br /><br />
+
 @section Scripts{
 
     @if (Model.Header != null)

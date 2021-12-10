@@ -2,25 +2,25 @@
 @model  CartViewModel
 @{
     ViewBag.Title = "ShoppingKart";
-    Layout = "~/Views/Shared/_CRM_Marketing.cshtml";
+  
 }
 
 <style>
-    .title{
+    .title {
         font-weight: bold;
-        color:black;        
+        color: black;
     }
 
     .cart-label {
-        background-color: #236386;     
+        background-color: #236386;
         border-color: black;
         border-width: 3px;
-        border-style: solid;       
-        width:200px;
-        margin:auto;
-        display:flex;
+        border-style: solid;
+        width: 200px;
+        margin: auto;
+        display: flex;
         align-items: center;
-        padding:5px;
+        padding: 5px;
         color: whitesmoke;
     }
 
@@ -29,7 +29,7 @@
         border-color: black;
         border-width: 3px;
         border-style: solid;
-        width:180px;
+        width: 180px;
         margin: auto;
         padding: 5px;
         color: black;
@@ -39,13 +39,13 @@
         background-color: #236386;
         width: 120px;
         margin: auto;
-        padding: 2px;                
-        padding-left:12px;
+        padding: 2px;
+        padding-left: 12px;
     }
 
-    .btn-box{
+    .btn-box {
         margin: auto;
-        display:flex;
+        display: flex;
         align-items: center;
         font-weight: bold;
     }
@@ -58,16 +58,16 @@
     .total-label {
         padding: 10px 10px;
         background-color: #236386;
-        width: 90%;
-        margin: auto;       
+        width: 100%;
+        margin: 20px;
         color: white;
-        height: 50px;
+       
     }
 
 
     .action-btn {
         background-color: white;
-        border-color:#236386;
+        border-color: #236386;
         border-width: 3px;
         border-style: solid;
         font-weight: bold;
@@ -75,118 +75,135 @@
         border-radius: 2em
     }
 </style>
+
+
+<div class="top-bar -mx-4 px-4 md:mx-0 md:px-0">
+    <!-- BEGIN: Breadcrumb -->
+    <div class="-intro-x breadcrumb mr-auto hidden sm:flex">
+        <a href="@Url.Action("Index","Market")">Market</a>
+    </div>
+    <!-- END: Breadcrumb -->
+
+</div><br />
 <br />
-<div class="container">
-    <div class="row">
-        <div class="col-12 text-center">
-            <h2 class="title"> Any important advise related to shopping cart goes here!!</h2>
-        </div>
-    </div>
-    <br />
-    <div class="row">
-        <div class="col-md-1 col-sm-12">
-        </div>
-        <div class="col-md-3 col-sm-12 text-center">
-
-        </div>
-        <div class="col-md-2 col-sm-12">
-
-        </div>
-        <div class="col-md-6 col-sm-12 text-center">
-            <div class="text-center">
-                <a href="@Url.Action("Index","Market")" class="btn rounded shadow mr-5"><span style=" color: black;">Keep Shopping </span></a>
-                @if (Model.Templates.Count > 0)
-                {
-                    <a href="@Url.Action("Checkout","Market")" style="color:white" class="checkout-btn btn rounded shadow"><span class="btn-box">Checkout <i class="la la-arrow-right la-2x ml-2"></i></span></a>
-                }
-
-                <a href="@Url.Action("PurchaseHistory","Market")" style="color:white; width:160px" class="checkout-btn btn rounded shadow ml-5"><span class="btn-box">Purchase history <i class="la la-dollar la-2x ml-2"></i></span></a>
+<div class="grid grid-cols-12">
+    <div class="col-span-12">
+        <div class="col-md-12 text-center">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h2 class="title"> Any important advise related to shopping cart goes here!!</h2>
+                </div>
             </div>
-        </div>
-    </div>
-    <br />
-    @if (ViewBag.error != null)
+            <br />
+            <div class="row">
+                <div class="col-md-1 col-sm-12">
+                </div>
+                <div class="col-md-3 col-sm-12 text-center">
+
+                </div>
+                <div class="col-md-2 col-sm-12">
+
+                </div>
+                <div class="col-md-6 col-sm-12 text-center">
+                    <div class="text-center">
+                        <a href="@Url.Action("Brands","Market")" class="btn btn-secondary rounded shadow mr-5"><span style=" color: black;">Keep Shopping <i data-feather="shopping-cart"></i> </span></a>
+                        @if (Model.Templates.Count > 0)
+                {
+                    <a href="@Url.Action("Checkout","Market")" class="btn btn-primary rounded shadow"><span class="btn-box">Checkout <i data-feather="arrow-right"></i></span></a>
+        }
+
+                        <a href="@Url.Action("PurchaseHistory","Market")" style="color:white; width:160px" class="btn btn-primary rounded shadow ml-5"><span class="btn-box">Purchase history <i data-feather="dollar-sign"></i></i></span></a>
+                    </div>
+                </div>
+            </div>
+            <br />
+            @if (ViewBag.error != null)
     {
         <div class="alert-warning"><h1>@ViewBag.error</h1></div>
-    }
+}
 
-    <br />
-    <h2 style="float: left;"><span class="label-color"> Shopping Kart</span> </h2>
-    <h3 style="float: right; color: #236386; font-weight: bold">SubTotal : $@ViewBag.total</h3>
-    <br />
-    <hr />
-    <div class="row">
-        <div class="col-lg-3 col-3 title text-center">Product </div>
-        <div class="col-lg-3 col-3 title text-center">Detail</div>
-        <div class="col-lg-2 col-2 title text-center">QTY</div>
-        <div class="col-lg-2 col-2 title text-center">Unit Price</div>
-        <div class="col-lg-2 col-2 title text-center">total</div>
-    </div>
-    <hr />
-    <br />
-    @if (Model.Templates.Count > 0)
-    {
-        foreach (var item in Model.Templates)
-        {           
-            <div class="row">
-                <div class="col-md-3 col-3 text-center">
-                    <p> Item#: @item.Templateid</p>
-                    <br />
-                    <img src="~/@item.Location" height="100" alt="Alternate Text" />
+            <br />
+            <h2 class="" style="float: left;"> Order Details</h2>
 
-                    <br />
-                    <br />
-                    <br />
-                    <a class="action-btn shadow" href="@Url.Action("EditTemplate", "Market", new { id = item.Id })" style="color: #236386"><i class="la la-edit la-2x"></i></a>
-                    <a class="deletebtn action-btn shadow" href="#" style="color: #236386"><i class="la la-trash la-2x" id="@item.Id"></i></a>
-                    <a class="lensbtn action-btn shadow" href="#" style="color: #236386"><i class="la la-file-picture-o la-2x" id="~/@item.Location"></i></a>
-                    <btn href="#" style="display:none" id="openmodal" data-toggle="modal" data-target="#modalNewwebinar"></btn>
-                </div>
-                <div class="col-md-3 col-3 text-center">
-                    <div class="font-size-short">
-                        <p>Type:  @item.Material</p>                      
-                        <br />
-                        @if (item.Laminate || item.Clearcoat)
+            @*<h3 style="float: right; color: #236386; font-weight: bold">SubTotal : $@ViewBag.total</h3>*@
+            <br />
+            <br />
+            <br />
+            <br />
+            <a href="#" id="openmodal" class="btn" data-toggle="modal" data-target="#modalNewwebinar">open</a>
+
+            <hr />
+            <table class="table table-bordered">
+                <thead>
+                    <tr class="text-white" style="background-color:#162343">
+                        <th>Product</th>
+                        <th>Detail</th>
+                        <th>Quantity</th>
+                        <th>Unit Price</th>
+                        <th>total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Templates.Count > 0)
+            {
+                foreach (var item in Model.Templates)
+                {
+                    <tr>
+                        <td class="border">
+                            <h2 class="text-lg font-medium mr-auto"> Item#: @item.Templateid</h2>
+                            <br />
+                            <img src="~/@item.Location" alt="Alternate Text" style="width:250px" />
+
+
+                            <br />
+                            <a class="btn btn-primary shadow" style="margin-right:10px" href="@Url.Action("EditTemplate", "Market", new { id = item.Id })">EDIT</a>
+                            <a class="deletebtn btn btn-primary shadow" style="margin-right:10px" href="#" id="@item.Id">DELETE</a>
+                            <a class="lensbtn btn btn-primary shadow" href="#" id="~/@item.Location">SHOW</a>
+                        </td>
+                        <td class="border">
+                            <div class="font-size-short">
+                                <p class="text-lg font-medium mr-auto">Type:  @item.Material</p>
+                                <br />
+                                @if (item.Laminate || item.Clearcoat)
                         {
                             <div>
                                 LAYOUT:
 
                                 @if (item.Laminate)
-                                {
-                                    <p> Laminate </p>
-                                }
+                        {
+                            <p> Laminate </p>
+                }
 
                                 @if (item.Clearcoat)
-                                {
-                                    <p> Clearcoat </p>
-                                }
+                        {
+                            <p> Clearcoat </p>
+                }
 
                             </div>
-                        }
+                }
 
-                        <div>
-                            <p><strong>Labels:</strong> </p>
-                            @{
+                                <div>
+                                    <p><strong>Labels:</strong> </p>
+                                    @{
                                 var a = 1;
-                            }
-                            @foreach (var label in Model.Labels)
+                                    }
+                                    @foreach (var label in Model.Labels)
                             {
                                 if (label.saved_template == item.Id)
                                 {
                                     <p>  Label @a : @label.text</p>
 
-                                    a++;
+                            a++;
 
-                                }
-                            }
+                        }
+                    }
 
-                        </div>
-                    </div>
-
-                </div>
-                <div class="col-md-2 col-2 text-center">
-                    <select class="form-control">
-                        @foreach (var it in Model.Amounts)
+                                </div>
+                            </div>
+                        </td>
+                        <td class="border">
+                            <select class="form-control">
+                                @foreach (var it in Model.Amounts)
                         {
                             if (it.type == item.dimension)
                             {
@@ -195,96 +212,90 @@
                                     if (itm == item.Amount)
                                     {
                                         <option selected value="@itm">@itm</option>
-                                    }
-                                    else
-                                    {
-                                        <option value="@itm">@itm</option>
-                                    }
-
-                                }
-
                             }
-                        }
+                            else
+                            {
+                                <option value="@itm">@itm</option>
+                    }
 
-                    </select>
-                </div>
-                <div class="col-md-2 col-2 label-color text-center">$@(item.Price/item.Amount)</div>
-                <div class="col-md-2 col-2 label-color text-center">$@(item.Price)</div>
-                <br />
-                <hr />
-            </div>
+                }
 
+            }
         }
 
-    }
-    else
-    {
-        <div class="flex-column" style="display:flex; align-content:center; align-items:center; ">
+                            </select>
+                        </td>
+                        <td class="border">
+                            $@(item.Price / item.Amount)
+                        </td>
+                        <td class="border" style="text-align:right;"><p class="text-lg font-medium mr-auto">$@(item.Price)</p></td>
+                    </tr>
 
-            <h1>No Templated created yet, go shopping!</h1>
-        </div>
-        <br />
-        <hr />
-        <br />
-    }
+        }
+        <tr>
+            <td colspan="3"></td>
+            <td><a href="@Url.Action("Checkout","Market")" style="color:white;" class="btn btn-primary rounded shadow"><span class="btn-box">Checkout <i data-feather="arrow-right"></i></span></a></td>
+            <td style="text-align:right;">
+                <div class="total-label">
+                    <h3 style="color: white; font-weight: bold">SubTotal : $@ViewBag.total</h3>
+                </div>
+            </td>
+        </tr>
 
-    <br />
-    <br />
-    <br />
-    <div class="row">
-        <div class="col-12">
-            <div class="total-label">
-                <h3 style="float: right; color: white; font-weight: bold">SubTotal : $@ViewBag.total</h3>
-            </div>
-        </div>
-    </div>
-    <br />
-    <div class="row">
-        <div class="col-md-1 col-sm-12">
-        </div>
-        <div class="col-md-5 col-sm-12 text-center">
-        </div>
-        <div class="col-md-6 col-sm-12 text-center">
-            <div style="display:flex; align-items:center" class="text-center">
-                <img src="~/Content/images/cc-images/lock.png" height="50" alt="Alternate Text" />
-                <span class="label-color mx-4">100% secure </span>
-                <img src="~/Content/images/cc-images/godaddy.png" height="30" alt="Alternate Text" />
-                <a href="@Url.Action("Checkout","Market")" style="color:white" class="checkout-btn btn rounded shadow"><span class="btn-box">Checkout <i class="la la-arrow-right la-2x ml-2"></i></span></a>
-            </div>
-        </div>
-    </div>
-    <br />
-    <div class="row">
-        <div class="col-md-1 col-sm-12">
-        </div>
-        <div class="col-md-5 col-sm-12 text-center">
-        </div>
-        <div class="col-md-5 col-sm-12 text-center">
-            <div class="text-center">
-                <div style="float: right">
-                    <img class="mx-3" src="~/Content/images/cc-images/visa-b.png" height="30" alt="Alternate Text" />
-                    <img class="mx-3" src="~/Content/images/cc-images/master-b.png" height="30" alt="Alternate Text" />
-                    <img class="mx-3" src="~/Content/images/cc-images/discover-b.png" height="30" alt="Alternate Text" />
-                    <img class="mx-3" src="~/Content/images/cc-images/amex-b.png" height="30" alt="Alternate Text" />
+}
+else
+{
+        <tr>
+            <td colspan="5">
+                <h2>No Templated created yet, go shopping!</h2>
+            </td>
+        </tr>
+}
+
+                </tbody>
+            </table>
+
+            <br />
+
+            <br />
+            <div class="row">
+                <div class="col-md-1 col-sm-12">
+                </div>
+
+                <div class="col-md-10 col-sm-12 text-center">
+
+                    <div style="display:flex; align-items:center;text-align:right" class="text-center">
+                        <img src="~/Content/images/cc-images/lock.png" height="50" alt="Alternate Text" />
+                        <span class="label-color mx-4">100% secure </span>
+                        <img src="~/Content/images/cc-images/godaddy.png" height="30" alt="Alternate Text" style="margin-right:30px" />
+
+                        <img class="mx-3" src="~/Content/images/cc-images/visa-b.png" height="30" alt="Alternate Text" />
+                        <img class="mx-3" src="~/Content/images/cc-images/master-b.png" height="30" alt="Alternate Text" />
+                        <img class="mx-3" src="~/Content/images/cc-images/discover-b.png" height="30" alt="Alternate Text" />
+                        <img class="mx-3" src="~/Content/images/cc-images/amex-b.png" height="30" alt="Alternate Text" />
+                    </div>
+
                 </div>
             </div>
+            <br />
+            <br />
         </div>
     </div>
-    <br />
-    <br />
+
 </div>
+
 
 <div aria-hidden="true" id="modalNewwebinar" tabindex="-1" role="dialog" aria-labelledby="closewindow" class="modal fade">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-            <div style="background:#f4f4f4" class="modal-header">              
+            <div style="background:#f4f4f4" class="modal-header">
                 <button data-dismiss="modal" class="close" aria-label="Close">
-                    <span style="background-color: black !important" aria-hidden="true"> &times;</span>
+                    <i data-feather="x-circle"></i>
                 </button>
             </div>
             <div class="modal-body" style="display:flex; justify-content:center;">
-                <img id="modalimg"  alt="Template" style="margin:20px"/>
-            </div>  
+                <img id="modalimg" alt="Template" style="margin:20px" />
+            </div>
             <br />
             <br />
         </div>
@@ -296,7 +307,7 @@
     var deletebtn = document.querySelectorAll(".deletebtn");
     var lens = document.querySelectorAll(".lensbtn");
     var modalimg = document.querySelector("#modalimg");
-    
+
 
     for (var item of deletebtn) {
         item.addEventListener('click', deleteTemplate);
@@ -309,7 +320,10 @@
 
     function getPicUrl(e) {
         modalimg.src = e.target.id;
-        $("#openmodal").trigger("click");
+        var link = document.getElementById('openmodal');
+   
+            link.click();
+
     }
 
 
@@ -317,9 +331,10 @@
         console.log(e.target);
  isconfirm = confirm("Are you sure you want to delete this item?");
         if (isconfirm) {
-            $("#preloader").show();
+            //$("#preloader").show();
+            console.log(e.target.id);
             var data = { id: e.target.id };
-            
+
           $.ajax({
                         type: 'GET',
                         contentType: 'application/json',
@@ -328,23 +343,22 @@
                         processData: true,
                         success: function (result) {
                             if (result == "SUCCESS") {
-                               
-                                new Noty({
-                                    type: 'success',
-                                    layout: 'topRight',
-                                    text: 'Template deleted succesfully',
-                                    progressBar: true,
-                                    timeout: 2500
-                                }).show()
-                                e.target.parentNode.parentNode.parentNode.parentNode.removeChild(e.target.parentNode.parentNode.parentNode);
-                                $("#preloader").hide();
+
+                        
+                                Swal.fire(
+                                    'Template deleted',
+                                    'Template deleted succesfully.',
+                                    'success'
+                                )
+                                window.location.reload();
+                             
                             }
                             else {
                                 $("#preloader").hide();
-                                setTimeout(function () {                                  
+                                setTimeout(function () {
                                     alert(result);
                                 }, 1000);
-                               
+
                             }
                         },
                         error: function (error) {
@@ -353,10 +367,10 @@
                                 alert("Error deleting template, refresh the page and try again...");
                             }, 1000);
 
-                           
-                          
-                           
-                           
+
+
+
+
                         }
                     });
     }

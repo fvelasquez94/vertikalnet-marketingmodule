@@ -2,14 +2,14 @@
 
 @{
     ViewBag.Title = "Payment";
-    Layout = "~/Views/Shared/_CRM_Marketing.cshtml";
+
 }
 
 <style>
     .header-box {
         background-color: gray;
-        width:100%;
-        margin: auto;       
+        width: 100%;
+        margin: auto;
         padding: 5px;
         color: white;
     }
@@ -35,57 +35,55 @@
         justify-items: center;
         justify-content: center;
         flex-flow: column wrap;
-        align-content:space-around;
-        text-align:center;
+        align-content: space-around;
+        text-align: center;
     }
 </style>
-<link rel="stylesheet" href="~/Content/common/stripe/global.css" />
-<br />
-<div class="row">
-    <div class="col-md-11 col-sm-12">
-        <div class="float-left">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item" style="font-weight: bold; color: #236386"><a href="@Url.Action("Template", "Market", new {broker=0 })"><i class="fas fa-check"></i> BILLING AND SHIPPING</a></li>
-                    <li class="breadcrumb-item" style="font-weight: bold; color: darkgreen"><i class="fas fa-circle"></i> VERIFY</li>
-                    <li class="breadcrumb-item" aria-current="page"><i class="fas fa-arrow-right"></i> CONFIRMATION</li>
-                </ol>
-            </nav>
-        </div>
+@*<link rel="stylesheet" href="~/Content/common/stripe/global.css" />*@
+
+<div class="top-bar -mx-4 px-4 md:mx-0 md:px-0">
+    <!-- BEGIN: Breadcrumb -->
+    <div class="-intro-x breadcrumb mr-auto hidden sm:flex">
+        <a href="@Url.Action("Index","Market")">Market</a> <i data-feather="chevron-right" class="breadcrumb__icon"></i>
+        <a href="@Url.Action("Checkout","Market")">Check Out</a> <i data-feather="chevron-right" class="breadcrumb__icon"></i>
+        <a href="#" class="breadcrumb--active">Payment</a>
     </div>
-    <div class="col-md-1 col-sm-12"></div>
-</div>
+    <!-- END: Breadcrumb -->
+
+</div><br />
 <br />
-<br />
-<div class="container">
-    <div class="row">
-        <div class="col-md-4 col-sm-12">
-            <div>
-                VERIFY & SUBMIT ORDER
+<div class="grid grid-cols-12">
+    <div class="col-span-12">
+        <div class="row">
+            <div class="col-md-4 col-sm-12">
+                <h2>
+                    VERIFY & SUBMIT ORDER
+                </h2>
+            </div>
+            <div class="col-md-8 col-sm-12">
+                <a href="@Url.Action("PurchaseHistory","Market")" style="float:right; color:white; width:160px" class=" btn btn-primary rounded shadow ml-5"><span class="btn-box">Purchase history <i class="la la-dollar la-2x ml-2"></i></span></a>
             </div>
         </div>
-        <div class="col-md-8 col-sm-12">
-            <a href="@Url.Action("PurchaseHistory","Market")" style="float:right; color:white; width:160px" class="checkout-btn btn rounded shadow ml-5"><span class="btn-box">Purchase history <i class="la la-dollar la-2x ml-2"></i></span></a>
-        </div>
-    </div>
-    <br />
-    <div class="row">
-        <div class="col-md-6 col-sm-12">
-            <div class="header-box" style="display: inline-block">
-                <h3 style="color:white">BILLING INFORMATION  <a id="billingbtn" href="#" style="color: black; float:right">Edit</a></h3>
-            </div>
-            <br />
-            <br />
-            <div id="billing">
-                <span>@Model.first_name @Model.last_name </span><br />
-                <span>@Model.phone</span><br />
-                <span>@Model.email</span><br />
-                <span>@Model.b_Adress @Model.b_suite</span><br />
-                <span>@Model.city, @Model.state, @Model.zip_code</span><br />
-                <span>@Model.s_country</span><br />
-            </div>
-            <br />
-            @if (Model.s_type != null)
+        <br />
+        <br />
+        <br />
+        <div class="row">
+            <div class="col-md-6 col-sm-12">
+                <div class="header-box" style="display: inline-block">
+                    <h3 style="color:white">BILLING INFORMATION  <a id="billingbtn" href="#" style="color: black; float:right">Edit</a></h3>
+                </div>
+                <br />
+                <br />
+                <div id="billing">
+                    <span>@Model.first_name @Model.last_name </span><br />
+                    <span>@Model.phone</span><br />
+                    <span>@Model.email</span><br />
+                    <span>@Model.b_Adress @Model.b_suite</span><br />
+                    <span>@Model.city, @Model.state, @Model.zip_code</span><br />
+                    <span>@Model.s_country</span><br />
+                </div>
+                <br />
+                @if (Model.s_type != null)
             {
                 <div class="header-box">
                     <h3 style="color:white">SHIPPING INFORMATION <a href="#" id="shippingbtn" style="color: black; float:right">Edit</a></h3>
@@ -101,47 +99,52 @@
 
                 </div>
                 <br />
-            }
-            <div class="header-box">
-                <h3 style="color:white">ESPECIAL INSTRUCTIONS</h3>
+        }
+                <div class="header-box">
+                    <h3 style="color:white">ESPECIAL INSTRUCTIONS</h3>
+                </div>
+                <br />
+                <textarea class="form-control" style="height:100px"></textarea>
+                <br />
             </div>
-            <br />
-            <textarea class="form-control" style="height:100px"></textarea>
-            <br />          
-        </div>
-        <div class="col-md-6 col-sm-12">
-            <div class="header-box">
-                <h3 style="color:white">ORDEN SUMMARY</h3>
+            <div class="col-md-6 col-sm-12">
+                <div class="header-box">
+                    <h3 style="color:white">ORDEN SUMMARY</h3>
+                </div>
+                <br />
+                <div><span style="float:left">Subtotal:</span><span style="float:right">@(ViewBag.total - 24.95M)</span></div><br />
+                <hr />
+                <div><span style="float:left">NY Sales Tax:</span><span style="float:right">$00.00</span></div><br />
+                <hr />
+                <div><span style="float:left">Shipping:</span><span class="shippinglbl" style="float:right">$24.95</span></div><br />
+                <hr />
+                <div><span style="float:left"><strong>Total:</strong></span><span style="float:right"><strong class="totallbl">@ViewBag.total</strong></span></div><br />
+                <br />
+                <div class="header-box">
+                    <h3 style="color:white">SHIPPING METHOD</h3>
+                </div>
+                <br />
+                <!--
+            <input selected id="item.id" class="shipping" type="radio" value="item.price" style="margin-right:15px" />
+            -->
+                <div><span style="float:left">UPS Ground	</span><span style="float:right">$24.95</span></div><br /><br />
+                <br />
+                <div class="header-box">
+                    <h3 style="color:white">PAYMENT METHOD</h3>
+                </div>
+                <br />
+                <div><h2><strong>DEBIT / CREDIT CARD</strong></h2></div>
+                <br />
+                <button data-toggle="modal" data-target="#modalNewwebinar" class="btn btn-success  rounded shadow" id="paymentbtn"><span class="btn-box">Complete payment <i class="la la-cc-stripe la-2x ml-2"></i></span></button>
+                <br />
             </div>
-            <br />
-            <div><span style="float:left">Subtotal:</span><span style="float:right">@(ViewBag.total-24.95M)</span></div><br />
-            <hr />
-            <div><span style="float:left">NY Sales Tax:</span><span style="float:right">$00.00</span></div><br />
-            <hr />
-            <div><span style="float:left">Shipping:</span><span class="shippinglbl" style="float:right">$24.95</span></div><br />
-            <hr />
-            <div><span style="float:left"><strong>Total:</strong></span><span style="float:right"><strong class="totallbl">@ViewBag.total</strong></span></div><br />
-            <br />
-            <div class="header-box">
-                <h3 style="color:white">SHIPPING METHOD</h3>
-            </div>
-            <br />
-            <!--
-    <input selected id="item.id" class="shipping" type="radio" value="item.price" style="margin-right:15px" />
-    -->
-            <div><span style="float:left">UPS Ground	</span><span style="float:right">$24.95</span></div><br /><br />
-            <br />
-            <div class="header-box">
-                <h3 style="color:white">PAYMENT METHOD</h3>
-            </div>
-            <br />
-            <div><h2><strong>DEBIT / CREDIT CARD</strong></h2></div>
-            <br />
-            <button data-toggle="modal" data-target="#modalNewwebinar" class="checkout-btn rounded shadow" id="paymentbtn"><span class="btn-box">Complete payment <i class="la la-cc-stripe la-2x ml-2"></i></span></button>
-            <br />
         </div>
     </div>
+
 </div>
+
+
+
 
 <div aria-hidden="true" id="modalNewwebinar" tabindex="-1" role="dialog" aria-labelledby="closewindow" class="modal fade">
     <div class="modal-dialog modal-lg" role="document">
@@ -154,20 +157,20 @@
             <div class="modal-body">
                 <div>
                     <img src="~/Content/pgrlogos/S7VENLogoBlack.png" alt="logo" style="width:100px;" class="logo-big">
-                </div> 
+                </div>
                 <br />
                 <div style="width:80%;">
                     <div class="header-box" style="background-color:#0056b3">
                         <h3 style="color:white">ORDEN SUMMARY</h3>
                     </div>
                     <br />
-                    <div><span style="float:left">Subtotal:</span><span style="float:right">@(ViewBag.total-24.95M)</span></div><br />
-                    <hr />                   
+                    <div><span style="float:left">Subtotal:</span><span style="float:right">@(ViewBag.total - 24.95M)</span></div><br />
+                    <hr />
                     <div><span style="float:left">NY Sales Tax:</span><span style="float:right">$24.95</span></div><br />
                     <hr />
                     <div><span style="float:left">Shipping:</span><span class="shippinglbl" style="float:right">$0.00</span></div><br />
                     <hr />
-                    <div><span style="float:left"><strong>Total:</strong></span><span style="float:right" ><strong class="totallbl">@ViewBag.total</strong></span></div><br />
+                    <div><span style="float:left"><strong>Total:</strong></span><span style="float:right"><strong class="totallbl">@ViewBag.total</strong></span></div><br />
                     <br />
                 </div>
 
@@ -180,13 +183,13 @@
                     <p>Powered by stripe!</p>
                     <strong>
                         <p id="card-error" role="alert" style="color:red"></p>
-                    </strong> 
+                    </strong>
                     <strong>
                         <p style="color:green" class="result-message hidden">
                             Payment succeeded!!, you will be redirected to a confirmation page.
                         </p>
                     </strong>
-                </form> 
+                </form>
                 <br />
                 <div class="text-center">
                     <img class="mx-1" src="~/Content/images/cc-images/visa-b.png" height="30" alt="Alternate Text" />

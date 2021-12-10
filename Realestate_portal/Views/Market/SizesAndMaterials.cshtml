@@ -1,70 +1,76 @@
 ﻿@{
     ViewBag.Title = "SizesAndMaterials";
-    Layout = "~/Views/Shared/_CRM_Marketing.cshtml";
+
 }
 
 <style>
-    #img{
+    #img {
         border: solid black 2px;
     }
 
-    #price,#pricelbl{
-        font-size:20px;
+    #price, #pricelbl {
+        font-size: 20px;
     }
+
     #description {
         color: black;
         font-size: 20px;
     }
 </style>
-<br />
-<div class="row">
-    <div class="col-12">
-        <nav aria-label="breadcrumb" class="float-left">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="@Url.Action("Dashboard", "Portal", new {broker=0 })">Home</a></li>
-                <li class="breadcrumb-item"><a href="@Url.Action("Index","Market")">Market</a></li>
-                <li class="breadcrumb-item"><a href="@Url.Action("brands","Market")">Brands</a></li>
-                <li class="breadcrumb-item"><a href="@Url.Action("Categories","Market")">Categories</a></li>
-                <li class="breadcrumb-item"><a href="@Url.Action("Template","Market")">Template</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Size and Materials</li>
-            </ol>
-        </nav>
-        @Html.Partial("Utilities/ShoppingCart")
+
+
+
+<div class="top-bar -mx-4 px-4 md:mx-0 md:px-0">
+    <!-- BEGIN: Breadcrumb -->
+    <div class="-intro-x breadcrumb mr-auto hidden sm:flex">
+        <a href="@Url.Action("Index","Market")">Market</a> <i data-feather="chevron-right" class="breadcrumb__icon"></i>
+            <a href="@Url.Action("Brands","Market")">Brands</a> <i data-feather="chevron-right" class="breadcrumb__icon"></i>
+            <a href="@Url.Action("Categories","Market")">Categories</a> <i data-feather="chevron-right" class="breadcrumb__icon"></i>
+            <a href="@Url.Action("Template","Market")">Template</a> <i data-feather="chevron-right" class="breadcrumb__icon"></i>
+        
+        <a href="#" class="breadcrumb--active">Size and Materials </a>
     </div>
-</div>
-<div class="row">
-    <div class="col-md-12  text-center">
-        <div style="float: right">
-            <h2 style="font-weight: bold; color: black ">Materials and Sizes</h2>
-        </div>
-    </div>
-</div>
+    <!-- END: Breadcrumb -->
+
+</div><br />
 <br />
-<div class="row">
-    <div class="col-12 float-left">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="@Url.Action("Template", "Market", new {broker=0 })" style="font-weight: bold; color: #236386"><i class="fas fa-check"></i> Select a template</a></li>
-                <li class="breadcrumb-item" aria-current="page" style="font-weight: bold; color: darkgreen"><i class="fas fa-circle"></i> Select size and materials</li>
-                <li class="breadcrumb-item" aria-current="page"><i class="fas fa-arrow-right"></i> Customize it</li>                
-            </ol>
-        </nav>
-    </div>
-</div>
-<br />
-<br />
-<div class="row">
-    <div class="col-md-1 col-sm-12"></div>
-    <div class="col-md-5 col-sm-12">
-        <img src="~/@ViewBag.Path" id="img"   alt="Alternate Text" />
-        <br />
-        <br />       
-        <br />
-    </div>
-    <div class="col-md-1 col-sm-12"></div>
-    <div class="col-md-4 col-sm-12">
-        <!--Form starts here-->
-        @using (Html.BeginForm("TemplateCreate", "Market", FormMethod.Post))
+
+<div class="grid grid-cols-12">
+    <div class="col-span-12 2xl:col-span-12">
+        <div class="container mt-1">
+            <div class="row">
+                <div class="col-md-12  text-center">
+                    <h1 style="font-weight: bold; color: black ">Materials and Sizes</h1>
+                    <br />
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-12 float-left">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="@Url.Action("Template", "Market", new {broker=0 })" style="font-weight: bold; color: #236386;margin-right:10px"><i data-feather="check-circle"></i> Select a template</a></li>
+                            <li class="breadcrumb-item" aria-current="page" style="font-weight: bold; color: darkgreen;margin-right:10px"><i data-feather="check-circle"></i> Select size and materials</li>
+                            <li class="breadcrumb-item" aria-current="page"><i data-feather="arrow-right"></i> Customize it</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+            <br />
+            <br />
+            <br />
+            <div class="row">
+                <div class="col-md-1 col-sm-12"></div>
+                <div class="col-md-5 col-sm-12">
+                    <img src="~/@ViewBag.Path" id="img" alt="Alternate Text" />
+                    <br />
+                    <br />
+                    <br />
+                </div>
+                <div class="col-md-1 col-sm-12"></div>
+                <div class="col-md-4 col-sm-12">
+                    <!--Form starts here-->
+                    @using (Html.BeginForm("TemplateCreate", "Market", FormMethod.Post))
         {
             @Html.AntiForgeryToken()
             <br />
@@ -78,9 +84,9 @@
                         <option value="0" selected>Choose...</option>
                         <option value="10" selected>test-one</option>
                         @foreach (var item in ViewBag.dimensions)
-                        {
-                            <option value="@item">@item</option>
-                        }
+            {
+                <option value="@item">@item</option>
+}
                     </select>
                 </div>
                 <div><span style="color:red" id="wngdimension"></span> </div>
@@ -123,12 +129,21 @@
                 </div>
             </div>
             <!--Form ends here-->
-        }
-        <button id="validator" style="background-color: #236386; color: white;" class="btn btn-lg btn-block"><strong>CUSTOMIZE IT</strong> <i style="color: white" class="fas fa-arrow-right"></i></button>
+}
+                    <button id="validator" class="btn btn-primary btn-lg btn-block"><strong>CUSTOMIZE IT</strong> <i data-feather="arrow-right"></i></button>
+                </div>
+
+                <div class="col-md-1 col-sm-12"></div>
+
+            </div>
+
+        </div>
+
     </div>
-    
-    <div class="col-md-1 col-sm-12"></div>
+
 </div>
+
+
 <br />
 <br />
 
@@ -137,7 +152,7 @@
           window.onload = function () {
             var img = document.getElementById("img");
             img.width = removePixels("@ViewBag.width");
-            img.height = removePixels("@ViewBag.height");           
+            img.height = removePixels("@ViewBag.height");
         }
 
         var dimension = document.getElementById("dimension");
@@ -147,9 +162,9 @@
         var wngmat = document.getElementById("wngdimension");
         var price = document.getElementById("price");
         var pricelbl = document.getElementById("pricelbl");
-        var description = document.getElementById("description");        
-        var priceval = document.getElementById("priceval");      
-        var dimensionval = document.getElementById("dimensionval");      
+        var description = document.getElementById("description");
+        var priceval = document.getElementById("priceval");
+        var dimensionval = document.getElementById("dimensionval");
         var prices;
         var quantities;
         var flag = 0;
@@ -161,11 +176,11 @@
             var counter = 0;
             if (e.target.value !== 0) {
                 if (prices) {
-                    if (quantities) {                       
-                        for (var item of quantities) {                           
+                    if (quantities) {
+                        for (var item of quantities) {
                             if (item == e.target.value) {
                                 price.innerHTML = "$ " + prices[counter];
-                                priceval.value = prices[counter];                              
+                                priceval.value = prices[counter];
                             }
                             counter++;
                         }
@@ -175,7 +190,7 @@
         }
 
 
-        dimension.onchange = (e) => {          
+        dimension.onchange = (e) => {
             if (e.target.value != 0) {
                  $("#preloader").show();
             var type = dimension.value;
@@ -270,5 +285,5 @@
             }
             return result;
         }
-    </script>  
-    }
+    </script>
+}

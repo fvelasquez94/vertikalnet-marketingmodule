@@ -1,7 +1,7 @@
 ﻿@model List<Realestate_portal.Models.Template_type>
 @{
     ViewBag.Title = "Categories";
-    Layout = "~/Views/Shared/_CRM_Marketing.cshtml";
+
 }
 
 <style>
@@ -75,91 +75,99 @@
         padding: 10px;
         align-content: space-around;
     }
-
-
-
 </style>
-<br />
-<div class="row">
-    <div class="col-12 ">
-        <nav aria-label="breadcrumb" class="float-left">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="@Url.Action("Dashboard", "Portal", new {broker=0 })">Home</a></li>
-                <li class="breadcrumb-item"><a href="@Url.Action("Index","Market")">Market</a></li>
-                <li class="breadcrumb-item"><a href="@Url.Action("brands","Market")">Brands</a></li>
-                @if(ViewBag.pgr){
-                <li class="breadcrumb-item"><a href="@Url.Action("Companies","Market", new {id=ViewBag.company, subcategory=true })">PREMIUM GROUP REALTY</a></li>
-                }
-                <li class="breadcrumb-item active" aria-current="page">Categories</li>
-            </ol>
-        </nav>
-        @Html.Partial("Utilities/ShoppingCart")
+<div class="top-bar -mx-4 px-4 md:mx-0 md:px-0">
+    <!-- BEGIN: Breadcrumb -->
+    <div class="-intro-x breadcrumb mr-auto hidden sm:flex">
+        <a href="@Url.Action("Index","Market")">Market</a> <i data-feather="chevron-right" class="breadcrumb__icon"></i>
+        <a href="@Url.Action("Brands","Market")">Brands</a> <i data-feather="chevron-right" class="breadcrumb__icon"></i>
+        @if (ViewBag.pgr)
+    {
+                                                            <a href="@Url.Action("Companies","Market", new {id=ViewBag.company, subcategory=true })">>PREMIUM GROUP REALTY</a> <i data-feather="chevron-right" class="breadcrumb__icon"></i>
+
+}
+
+        <a href="#" class="breadcrumb--active">Categories</a>
     </div>
+    <!-- END: Breadcrumb -->
+
+</div><br />
+<br />
+
+<div class="grid grid-cols-12">
+    <div class="col-span-12 2xl:col-span-12">
+        <div class="container mt-1">
+            <div class="row m-5">
+                <div class="col-md-12  text-center">
+                    <h1 style="font-weight: bold; color: black ">
+                        @if (Model.Count > 1)
+                {
+                    <span>Categories</span>
+        }
+        else
+        {
+            <span>Category</span>
+}
+                    </h1>
+                    <br />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-1 col-sm-12  text-center"></div>
+                <div class="flex-container">
+                    @foreach (var item in Model)
+            {
+                <div class="item-brands">
+                    @if (!ViewBag.pgr)
+            {
+                <a href="@Url.Action("Template","Market", new {company=ViewBag.company, type=item.id })">
+
+                    <div class="brand-2">
+                        <br />
+                        <div>
+                            <p>@item.type</p>
+                        </div>
+                        <br />
+                        <div>
+                            <img src="~/@item.path" height="100" alt="@item.type" />
+                        </div>
+                        <div class="message">
+                            <p class="m-label">Click to see details</p>
+                        </div>
+                    </div>
+                </a>
+    }
+    else
+    {
+        <a href="@Url.Action("Template","Market", new {company=ViewBag.company, type=item.id, subcategory=ViewBag.sub })">
+
+            <div class="brand-2">
+                <br />
+                <div>
+                    <p>@item.type</p>
+                </div>
+                <br />
+                <div>
+                    <img src="~/@item.path" height="100" alt="@item.type" />
+                </div>
+                <div class="message">
+                    <p class="m-label">Click to see details</p>
+                </div>
+            </div>
+        </a>
+}
+
+                </div>
+    }
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
 </div>
 
-<div class="container mt-3">
-    <div class="row m-5">
-        <div class="col-md-12  text-center">
-            <h1 style="font-weight: bold; color: black ">
-                @if (Model.Count > 1)
-            {
-                <span>Categories</span>
-            }
-            else
-            {
-            <span>Category</span>
-            }
-            </h1>
-            <br />
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-1 col-sm-12  text-center" ></div>         
-        <div class="flex-container">
-            @foreach (var item in Model)
-            {
-            <div class="item-brands">
-                @if (!ViewBag.pgr)
-                {
-                    <a href="@Url.Action("Template","Market", new {company=ViewBag.company, type=item.id })">
 
-                        <div class="brand-2">
-                            <br />
-                            <div>
-                                <p>@item.type</p>
-                            </div>
-                            <br />
-                            <div>
-                                <img src="~/@item.path" height="100" alt="@item.type" />
-                            </div>
-                            <div class="message">
-                                <p class="m-label">Click to see details</p>
-                            </div>
-                        </div>
-                    </a>
-                }
-                else
-                {
-                    <a href="@Url.Action("Template","Market", new {company=ViewBag.company, type=item.id, subcategory=ViewBag.sub })">
 
-                        <div class="brand-2">
-                            <br />
-                            <div>
-                                <p>@item.type</p>
-                            </div>
-                            <br />
-                            <div>
-                                <img src="~/@item.path" height="100" alt="@item.type" />
-                            </div>
-                            <div class="message">
-                                <p class="m-label">Click to see details</p>
-                            </div>
-                        </div>
-                    </a>
-                }
 
-            </div>
-            }
-        </div>
-        </div>
-    </div>

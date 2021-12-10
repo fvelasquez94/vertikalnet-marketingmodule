@@ -1,0 +1,126 @@
+﻿
+@{
+    Layout = null;
+    Realestate_portal.Models.Sys_Users user = (Realestate_portal.Models.Sys_Users)ViewBag.activeuser;
+   
+    List<Realestate_portal.Models.Sys_Notifications> notifications = ViewBag.notifications;
+
+}
+
+<div class="top-bar-boxed border-b border-theme-3 px-4 md:px-6 mb-14 md:mb-8">
+    <div class="h-full flex items-center">
+        <!-- BEGIN: Logo -->
+        <a href="#" class="-intro-x hidden md:flex">
+            <img alt="S7VEN" style="width:130px" src="~/Content/pgrlogos/S7VENLogoWhite.png">
+            <span class="text-white text-lg ml-3" style="font-size:11px"> REAL ESTATE AGENT PORTAL<span class="font-medium"></span> </span>
+        </a>
+        <!-- END: Logo -->
+        <!-- BEGIN: Breadcrumb -->
+        @*if (ViewBag.Title == "Dashboard")
+                {
+                    <div class="-intro-x breadcrumb breadcrumb--light mr-auto"> <a href="javascript:void(0);">Application</a> <i data-feather="chevron-right" class="breadcrumb__icon"></i> <a href="@Url.Action("Dashboard","Portal")" class="breadcrumb--active">Dashboard</a> </div>
+            }
+            else if (ViewBag.Title == "Premium Group Realty - Network")
+            {
+                <div class="-intro-x breadcrumb breadcrumb--light mr-auto"> <a href="javascript:void(0);">Application</a> <i data-feather="chevron-right" class="breadcrumb__icon"></i> <a href="javascript:void(0);" class="breadcrumb--active">Network</a> </div>
+
+            }
+            else if (ViewBag.Title == "Premium Group Realty - PGR Management")
+            {
+                <div class="-intro-x breadcrumb breadcrumb--light mr-auto"> <a href="javascript:void(0);">Application</a> <i data-feather="chevron-right" class="breadcrumb__icon"></i> <a href="javascript:void(0);" class="breadcrumb--active">Network</a> <i data-feather="chevron-right" class="breadcrumb__icon"></i> <a href="javascript:void(0);" class="breadcrumb--active">Management</a> </div>
+
+            }
+            else
+            {*@
+        <div class="-intro-x breadcrumb breadcrumb--light mr-auto"> <a href="javascript:void(0);">&nbsp;</a> </div>
+        @*}*@
+
+        <!-- END: Breadcrumb -->
+        <!-- BEGIN: Search -->
+        <!-- END: Search -->
+        <!-- BEGIN: Notifications -->
+        <div class="intro-x dropdown mr-4 sm:mr-6">
+            @if (ViewBag.CartItems != null)
+    {
+        if (ViewBag.CartItems > 0)
+        {
+            <div class="dropdown-toggle notification notification--light notification--bullet cursor-pointer" role="button" aria-expanded="false"> <i data-feather="shopping-cart" class="notification__icon dark:text-gray-300"></i> </div>
+
+}
+
+
+else
+{
+        <div class="dropdown-toggle notification  cursor-pointer" role="button" aria-expanded="false"> <i data-feather="shopping-cart" class="notification__icon dark:text-gray-300"></i> </div>
+
+}
+}
+else
+{ <div class="dropdown-toggle notification  cursor-pointer" role="button" aria-expanded="false"> <i data-feather="shopping-cart" class="notification__icon dark:text-gray-300"></i> </div>
+}<div class="notification-content pt-2 dropdown-menu">
+     <div class="notification-content__box dropdown-menu__content box dark:bg-dark-6">
+         <div class="notification-content__title">Order Details</div>
+         @if (ViewBag.CartItems != null)
+    {
+        if (ViewBag.CartItems > 0)
+        {
+            if (ViewBag.CartItems > 2)
+            {
+             <a href="@Url.Action("ShoppingCart","Market")" style="text-decoration:underline">@ViewBag.CartItems products in the cart.</a>
+
+    }
+    else
+    {
+     <a href="@Url.Action("ShoppingCart","Market")" style="text-decoration:underline">@ViewBag.CartItems product in the cart.</a>
+
+}
+}
+else
+{
+     <label style="font-size:11px">No products in the cart.</label>
+}
+}
+else
+{
+     <label style="font-size:11px">No products in the cart.</label>
+}
+
+     </div>
+            </div>
+        </div>
+        <!-- END: Notifications -->
+        <!-- BEGIN: Account Menu -->
+        <div class="intro-x dropdown w-8 h-8">
+            <div class="dropdown-toggle w-8 h-8 rounded-full overflow-hidden shadow-lg image-fit zoom-in" role="button" aria-expanded="false">
+            
+                    <img alt="S7VEN" src="~/Content/dist/images/profile-2.jpg">
+           
+
+            </div>
+            <div class="dropdown-menu w-56">
+                <div class="dropdown-menu__content box dark:bg-dark-6">
+                  
+                        <div class="p-4 border-b border-black border-opacity-5 dark:border-dark-3">
+                            <div class="font-medium">S7VEN MARKET</div>
+                            <div class="text-xs text-gray-600 mt-0.5 dark:text-gray-600">
+                                
+                            </div>
+                        </div>
+                    
+                   
+
+                    <div class="p-2">
+                        @*<a href="@Url.Action("UserProfile","Users")" class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-gray-200 dark:hover:bg-dark-3 rounded-md"> <i data-feather="user" class="w-4 h-4 mr-2"></i> Profile </a>
+                        <a href="@Url.Action("Forgot_password", "Portal")" class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-gray-200 dark:hover:bg-dark-3 rounded-md"> <i data-feather="lock" class="w-4 h-4 mr-2"></i> Reset Password </a>*@
+                        <a href="@Url.Action("ShoppingCart","Market")" class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-gray-200 dark:hover:bg-dark-3 rounded-md"> <i data-feather="shopping-cart" class="w-4 h-4 mr-2"></i> Cart </a>
+                    </div>
+           
+                    <div class="p-2 border-t border-black border-opacity-5 dark:border-dark-3">
+                        <a href="@Url.Action("Log_out", "Portal")" class="flex items-center block p-2 transition duration-300 ease-in-out hover:bg-gray-200 dark:hover:bg-dark-3 rounded-md"> <i data-feather="toggle-right" class="w-4 h-4 mr-2"></i> Logout </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END: Account Menu -->
+    </div>
+</div>
